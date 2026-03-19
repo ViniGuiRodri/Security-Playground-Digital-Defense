@@ -6,173 +6,7 @@
     <title>Defesa Digital - Jogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* --- VARIÁVEIS --- */
-        :root {
-            --bg-app: #f0f4f8; --bg-card: #ffffff;
-            --text-main: #202124; --text-muted: #5f6368;
-            --border-color: #e0e0e0;
-            --brand-streaming: #dc2626; --accent-blue: #1a73e8; 
-            --wpp-green: #008069; --wpp-bg: #efeae2;
-            --sms-blue: #0b57d0; --sms-bg: #f8f9fa; --sms-bubble: #e9ecef;
-            --game-bar-bg: #1e293b;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; font-size: 18px; }
-
-        body { background-color: var(--bg-app); color: var(--text-main); display: flex; justify-content: center; align-items: center; height: 100vh; padding: 10px; overflow: hidden; }
-
-        .app-container { width: 100%; max-width: 450px; background-color: var(--bg-card); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; height: 95vh; max-height: 850px; overflow: hidden; }
-        .hidden { display: none !important; }
-        .game-screen { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
-
-        /* --- BARRA DO JOGO (HUD) --- */
-        .game-hud { background-color: var(--game-bar-bg); color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; }
-        .btn-back { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1rem; padding: 6px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; font-weight: 500; }
-        .btn-back:hover { background: rgba(255,255,255,0.3); }
-        .score-badge { font-weight: 700; font-size: 1rem; background-color: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 15px; }
-
-        /* --- DASHBOARD (MENU PRINCIPAL) --- */
-        #screen-menu { background: #1e293b; color: white; overflow-y: auto; }
-        .hq-header { padding: 30px 20px 20px; text-align: center; flex-shrink: 0; }
-        .menu-logo { font-size: 3.5rem; margin-bottom: 5px; }
-        .menu-title { font-size: 1.8rem; font-weight: 700; color: #ffffff; line-height: 1.2; }
-        .global-score { background-color: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 30px; display: inline-block; margin-top: 15px; font-weight: 700; font-size: 1.1rem; color: #fbbf24; border: 2px solid rgba(251, 191, 36, 0.4); }
-        
-        .missions-container { background-color: var(--bg-card); border-radius: 25px 25px 0 0; padding: 25px; color: var(--text-main); min-height: 100%; }
-        
-        /* BARRA DE PROGRESSO GLOBAL */
-        .progress-section { margin-bottom: 25px; background-color: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
-        .progress-text { font-weight: 700; color: var(--text-main); font-size: 1.05rem; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;}
-        .progress-percent-badge { background-color: var(--accent-blue); color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.9rem; }
-        .progress-bar-bg { width: 100%; height: 12px; background-color: #e2e8f0; border-radius: 10px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background-color: #059669; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        /* CARDS DE CATEGORIA */
-        .category-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .category-card { background-color: white; border: 2px solid var(--border-color); border-radius: 16px; padding: 18px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: all 0.2s; }
-        .category-card:hover { border-color: var(--accent-blue); background-color: #eff6ff; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .category-icon { font-size: 2.2rem; background: #f1f5f9; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
-        .category-info { flex: 1; }
-        .category-name { font-weight: 700; font-size: 1.2rem; color: var(--text-main); margin-bottom: 4px; }
-        .category-meta { font-size: 0.9rem; color: var(--text-muted); }
-        .category-arrow { font-size: 1.2rem; color: var(--text-muted); font-weight: bold; }
-
-        /* LISTA DE NÍVEIS (Dentro da Categoria) */
-        .category-title { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .btn-back-cat { background: #f1f5f9; border: none; color: var(--text-main); font-size: 1rem; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; font-weight: 600; margin-bottom: 20px; transition: background 0.2s; }
-        .btn-back-cat:hover { background: #e2e8f0; }
-
-        .level-btn { background-color: white; border: 2px solid var(--border-color); padding: 20px; border-radius: 16px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }
-        .level-btn:hover { border-color: var(--accent-blue); background-color: #eff6ff; }
-        .level-info { display: flex; flex-direction: column; }
-        .level-name { font-weight: 700; font-size: 1.2rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
-        .level-desc { font-size: 1rem; color: var(--text-muted); margin-top: 6px; }
-        .level-icon { font-size: 2rem; }
-        .badge-done { background-color: #059669; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 12px; font-weight: bold; }
-
-        /* --- FASES OMITIDAS NO CSS (Mantidas como estavam) --- */
-        .gmail-header { padding: 15px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 1.2rem; flex-shrink: 0; }
-        .gmail-header-icons { margin-left: auto; letter-spacing: 15px; }
-        .gmail-content { padding: 20px 20px 40px 20px; overflow-y: auto; flex: 1; background: white; min-height: 0; }
-        .gmail-subject { font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; line-height: 1.3; color: var(--text-main); }
-        .gmail-sender-row { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
-        .gmail-avatar { width: 45px; height: 45px; background-color: var(--brand-streaming); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 500; font-size: 1.5rem; flex-shrink: 0; }
-        .gmail-sender-info { flex: 1; }
-        .gmail-sender-name { font-weight: 700; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; }
-        .gmail-date { font-weight: 400; font-size: 0.85rem; color: var(--text-muted); }
-        .gmail-sender-email { color: var(--text-muted); font-size: 0.85rem; margin-top: 2px; display: flex; align-items: center; gap: 5px; }
-        .gmail-to { font-size: 0.8rem; border: 1px solid #ddd; border-radius: 4px; padding: 1px 4px; }
-        .streaming-template { background-color: #000000; color: white; padding: 30px 20px; border-radius: 8px; margin-top: 10px; }
-        .streaming-logo { color: var(--brand-streaming); font-size: 2rem; font-weight: 800; margin-bottom: 20px; letter-spacing: 1px; }
-        .streaming-template p { color: #f1f5f9; margin-bottom: 20px; font-size: 1.05rem; line-height: 1.5; }
-        .btn-streaming { display: block; background-color: var(--brand-streaming); color: white; text-align: center; padding: 15px 20px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 1.1rem; margin: 30px 0; }
-        .gmail-footer-actions { display: flex; gap: 10px; margin-top: 30px; }
-        .gmail-action-btn { flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 20px; text-align: center; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; }
-
-        .wpp-header-real { background-color: var(--wpp-green); color: white; padding: 10px 15px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-        .wpp-header-back { font-size: 1.2rem; cursor: pointer; }
-        .wpp-avatar-real { width: 40px; height: 40px; background-color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; overflow: hidden; flex-shrink: 0; }
-        .wpp-contact-info { flex: 1; display: flex; flex-direction: column; }
-        .wpp-contact-name { font-weight: 500; font-size: 1.1rem; }
-        .wpp-contact-status { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
-        .wpp-header-icons { font-size: 1.2rem; display: flex; gap: 18px; align-items: center; }
-        .wpp-chat-area { flex: 1; padding: 15px 15px 20px 15px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; background-color: var(--wpp-bg); background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; min-height: 0; }
-        .chat-bubble { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 1.05rem; line-height: 1.4; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); color: #111; }
-        .chat-incoming { background-color: white; align-self: flex-start; border-top-left-radius: 0; }
-        .chat-incoming::before { content: ""; position: absolute; top: 0; left: -8px; width: 0; height: 0; border-top: 0px solid transparent; border-bottom: 12px solid transparent; border-right: 12px solid white; }
-        .chat-meta { display: flex; justify-content: flex-end; align-items: center; gap: 5px; margin-top: 4px; margin-bottom: -4px;}
-        .chat-time { font-size: 0.75rem; color: #667781; }
-        .wpp-input-area { background-color: #f0f2f5; padding: 10px; display: flex; align-items: flex-end; gap: 10px; flex-shrink: 0; }
-        .wpp-input-box { flex: 1; background-color: white; border-radius: 24px; padding: 10px 15px; display: flex; align-items: center; gap: 15px; color: var(--text-muted); font-size: 1rem; }
-        .wpp-input-icons { display: flex; gap: 15px; margin-left: auto; font-size: 1.2rem; }
-        .wpp-mic-btn { width: 45px; height: 45px; border-radius: 50%; background-color: var(--wpp-green); color: white; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0; }
-
-        .sms-header { background-color: #ffffff; padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
-        .sms-avatar { width: 45px; height: 45px; background-color: #f59e0b; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; flex-shrink: 0; }
-        .sms-contact-info { flex: 1; }
-        .sms-contact-name { font-weight: 700; font-size: 1.15rem; }
-        .sms-contact-details { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
-        .sms-header-icons { font-size: 1.3rem; display: flex; gap: 20px; color: var(--text-muted); }
-        .sms-container { background-color: var(--sms-bg); flex: 1; padding: 20px 20px 40px 20px; display: flex; flex-direction: column; overflow-y: auto; min-height: 0; }
-        .sms-date-divider { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 500; }
-        .sms-bubble { background-color: var(--sms-bubble); color: #111; max-width: 85%; padding: 16px; border-radius: 20px; border-bottom-left-radius: 4px; font-size: 1.1rem; line-height: 1.5; align-self: flex-start; }
-        .sms-link { color: var(--sms-blue); text-decoration: underline; font-weight: 500; word-break: break-all; }
-        .sms-input-area { background-color: #ffffff; padding: 15px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-        .sms-input-plus { font-size: 1.5rem; color: var(--text-muted); background: #f1f3f4; border-radius: 50%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-        .sms-input-box { flex: 1; background-color: #f1f3f4; border-radius: 24px; padding: 12px 20px; color: var(--text-muted); font-size: 1rem; }
-        .sms-send-btn { color: var(--sms-blue); font-size: 1.5rem; }
-
-        .social-header { background-color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; flex-shrink: 0; }
-        .social-header-icons { display: flex; gap: 20px; font-size: 1.5rem; }
-        .social-feed { flex: 1; background-color: white; overflow-y: auto; padding-bottom: 150px; min-height: 0; }
-        .social-post-header { padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
-        .social-avatar { width: 40px; height: 40px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 50%; padding: 2px; flex-shrink: 0; }
-        .social-avatar-inner { width: 100%; height: 100%; background-color: white; border-radius: 50%; border: 2px solid white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Check_green_icon.svg/1200px-Check_green_icon.svg.png'); background-size: cover; }
-        .social-user-info { flex: 1; display: flex; flex-direction: column; }
-        .social-username { font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 5px; }
-        .social-sponsored { font-size: 0.8rem; color: var(--text-muted); }
-        .social-options { font-size: 1.2rem; font-weight: bold; color: var(--text-muted); }
-        .social-post-media { width: 100%; aspect-ratio: 1/1; background-color: #000; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .social-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1585829365295-ab7cd400c167?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; }
-        .social-video-overlay-text { position: absolute; bottom: 20px; left: 10px; right: 10px; background-color: #dc2626; color: white; padding: 10px; font-weight: 700; font-size: 1.2rem; text-align: center; border-radius: 4px; }
-        .social-play-btn { position: relative; width: 80px; height: 80px; background-color: rgba(0,0,0,0.6); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 2.5rem; border: 3px solid white; z-index: 2; }
-        .social-post-cta { background-color: #f1f5f9; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-        .social-cta-text { font-size: 0.9rem; color: var(--text-muted); }
-        .social-cta-btn { font-weight: 700; color: var(--accent-blue); background: none; border: none; font-size: 1rem; cursor: pointer; }
-        .social-post-actions { padding: 12px 15px; display: flex; gap: 20px; font-size: 1.5rem; }
-        .social-likes { padding: 0 15px; font-weight: 700; font-size: 1rem; margin-bottom: 5px; }
-        .social-caption { padding: 5px 15px 15px; font-size: 1rem; line-height: 1.4; }
-        .social-caption strong { font-weight: 700; }
-        .social-comments { padding: 0 15px 20px; color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- RED FLAGS E MODAL --- */
-        .flag-target { cursor: pointer; position: relative; border-radius: 4px; transition: background 0.2s; }
-        .flag-target:hover { background-color: rgba(239, 68, 68, 0.15); outline: 2px dashed #ef4444; outline-offset: 2px; }
-        .flag-found { background-color: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 6px; padding: 2px 4px; margin: -2px -4px; pointer-events: none; }
-        .flag-target.social-play-btn:hover { outline: 4px dashed #ef4444; outline-offset: 5px; }
-        .flag-found.social-play-btn { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.5); }
-        
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        .modal-content { position: relative; background-color: white; width: 100%; max-width: 450px; padding: 40px 30px 30px 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); }
-        
-        /* NOVO ÍCONE DE FECHAR (Moderno, estilo App) */
-        .modal-close-icon { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #94a3b8; cursor: pointer; border-radius: 50%; width: 36px; height: 36px; display: flex; justify-content: center; align-items: center; transition: all 0.2s; }
-        .modal-close-icon:hover { background-color: #f1f5f9; color: var(--text-main); }
-
-        .modal-icon { font-size: 3.5rem; margin-bottom: 15px; }
-        .modal-title { font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 15px; }
-        .modal-text { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; text-align: left; }
-        
-        .modal-actions { display: flex; flex-direction: column; gap: 12px; }
-        .modal-btn { background-color: var(--accent-blue); color: white; border: none; padding: 16px 24px; border-radius: 12px; font-weight: 700; width: 100%; cursor: pointer; font-size: 1.15rem; transition: background 0.2s; }
-        .modal-btn:hover { opacity: 0.9; }
-        .modal-btn.success { background-color: #059669; }
-        .modal-btn.secondary { background-color: transparent; color: var(--text-main); border: 2px solid var(--border-color); }
-        .modal-btn.secondary:hover { background-color: #f8f9fa; border-color: #cbd5e1;}
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -180,9 +14,20 @@
         
         <div id="screen-menu" class="game-screen">
             <div class="hq-header">
-                <div class="menu-logo">🛡️</div>
-                <h1 class="menu-title">Defesa Digital</h1>
-                <div class="global-score">Pontos: <span id="ui-global-score">0</span></div>
+                <div class="hq-title-group">
+                    <div class="menu-logo">🛡️</div>
+                    <h1 class="menu-title">Defesa<br>Digital</h1>
+                </div>
+                <div class="hq-actions-group">
+                    <div class="global-score"><span id="ui-global-score">0</span> pts</div>
+                    <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </button>
+                </div>
             </div>
             
             <div class="missions-container">
@@ -190,7 +35,7 @@
                 <div id="view-categories">
                     <div class="progress-section">
                         <div class="progress-text">
-                            Progresso do Jogo
+                            Seu Progresso
                             <span class="progress-percent-badge" id="progress-percent">0%</span>
                         </div>
                         <div class="progress-bar-bg">
@@ -204,8 +49,8 @@
                         <div class="category-card" onclick="abrirCategoria('email')">
                             <div class="category-icon">✉️</div>
                             <div class="category-info">
-                                <div class="category-name">E-mails</div>
-                                <div class="category-meta">1 Nível Disponível</div>
+                                <div class="category-name">E-mails Falsos</div>
+                                <div class="category-meta" id="prog-cat-email">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -213,8 +58,8 @@
                         <div class="category-card" onclick="abrirCategoria('wpp')">
                             <div class="category-icon">💬</div>
                             <div class="category-info">
-                                <div class="category-name">WhatsApp</div>
-                                <div class="category-meta">1 Nível Disponível</div>
+                                <div class="category-name">Golpes no WhatsApp</div>
+                                <div class="category-meta" id="prog-cat-wpp">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -223,7 +68,7 @@
                             <div class="category-icon">📞</div>
                             <div class="category-info">
                                 <div class="category-name">Ligações e SMS</div>
-                                <div class="category-meta">1 Nível Disponível</div>
+                                <div class="category-meta" id="prog-cat-sms">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -231,8 +76,8 @@
                         <div class="category-card" onclick="abrirCategoria('social')">
                             <div class="category-icon">📱</div>
                             <div class="category-info">
-                                <div class="category-name">Redes Sociais</div>
-                                <div class="category-meta">1 Nível Disponível</div>
+                                <div class="category-name">Redes Sociais (IA)</div>
+                                <div class="category-meta" id="prog-cat-social">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -247,7 +92,7 @@
                         <button class="level-btn" data-category="email" id="btn-fase-email-1" onclick="abrirFase('fase-email-1', 4)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: A Mensalidade <span id="badge-email-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">E-mail dizendo que sua conta foi suspensa.</span>
+                                <span class="level-desc">Sua assinatura foi suspensa hoje.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
@@ -255,7 +100,7 @@
                         <button class="level-btn" data-category="wpp" id="btn-fase-wpp-1" onclick="abrirFase('fase-wpp-1', 6)">
                             <div class="level-info">
                                 <span class="level-name">Caso #02: Novo Número <span id="badge-wpp-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Alguém pedindo dinheiro de um número estranho.</span>
+                                <span class="level-desc">Oi mãe! Esse é meu provisório.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
@@ -263,7 +108,7 @@
                         <button class="level-btn" data-category="sms" id="btn-fase-sms-1" onclick="abrirFase('fase-sms-1', 3)">
                             <div class="level-info">
                                 <span class="level-name">Caso #03: A Encomenda <span id="badge-sms-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Um SMS cobrando taxa da Alfândega/Correios.</span>
+                                <span class="level-desc">Pague a taxa ou perca o pacote.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
@@ -271,7 +116,7 @@
                         <button class="level-btn" data-category="social" id="btn-fase-social-1" onclick="abrirFase('fase-social-1', 4)">
                             <div class="level-info">
                                 <span class="level-name">Caso #04: O Falso Famoso <span id="badge-social-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Vídeo criado por Inteligência Artificial (Deepfake).</span>
+                                <span class="level-desc">Vídeo criado por IA (Deepfake).</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
@@ -431,190 +276,12 @@
             
             <div class="modal-icon" id="modal-icon">🚨</div>
             <h2 class="modal-title" id="modal-title">Título</h2>
-            <p class="modal-text" id="modal-text">Texto explicativo.</p>
+            <div class="modal-text" id="modal-text">Texto explicativo.</div>
             
             <div class="modal-actions" id="modal-actions"></div>
         </div>
     </div>
 
-    <script>
-        // BANCO DE EXPLICAÇÕES
-        const explanations = {
-            'flag-urgency': { title: 'Cuidado com a pressa!', text: 'Golpistas usam palavras como "URGENTE" para te assustar. Eles querem que você aja rápido, sem pensar direito.' },
-            'flag-domain': { title: 'Olhe bem o remetente!', text: 'Repare no endereço: está escrito "netfiix" com dois "i". Empresas grandes não cometem esses erros de digitação.' },
-            'flag-greeting': { title: 'Não usaram seu nome?', text: 'Mensagens que começam com "Olá Cliente" costumam ser enviadas para milhares de pessoas para ver quem cai.' },
-            'flag-link': { title: 'Cuidado onde clica!', text: 'Nunca clique no botão direto! Em e-mails suspeitos, é mais seguro abrir o aplicativo oficial da empresa no seu celular.' },
-            
-            'flag-wpp-photo': { title: 'Não confie só na foto!', text: 'É muito fácil copiar a foto de alguém no Facebook ou Instagram. O golpista pega a foto do seu familiar e coloca no perfil falso.' },
-            'flag-wpp-header-number': { title: 'Cadê o nome na agenda?', text: 'Se fosse o seu familiar mesmo, o nome dele apareceria lá em cima, e não apenas um número de telefone estranho!' },
-            'flag-wpp-text': { title: 'A desculpa do celular novo', text: 'Sempre começa assim! Eles fingem que o celular quebrou ou caiu na água para justificar o uso de um número que você não conhece.' },
-            'flag-wpp-urgency': { title: 'A história triste', text: 'O golpista inventa que o banco bloqueou para justificar por que ele não pode usar a própria conta e precisa da sua ajuda.' },
-            'flag-wpp-pix': { title: 'Pediu dinheiro por mensagem?', text: 'Nunca envie dinheiro! Se alguém pedir PIX por mensagem, ligue para a pessoa no número ANTIGO dela (o que você já tem salvo) e converse por voz.' },
-            'flag-wpp-thirdparty': { title: 'Nome de um desconhecido!', text: 'Se o dinheiro é para o seu familiar, por que o PIX está em nome de um tal de "Marcos"? Eles usam contas de estranhos (laranjas) para receber o roubo.' },
-
-            'flag-sms-sender': { title: 'Número de celular comum?', text: 'Empresas grandes como os Correios ou Bancos usam números curtos (de 5 ou 6 dígitos) para enviar SMS, não um número de celular normal.' },
-            'flag-sms-urgency': { title: 'Ameaça de devolução!', text: 'Os golpistas dizem que você vai perder o pacote ou pagar multa. O objetivo é causar pânico para você clicar no link sem verificar se a mensagem é real.' },
-            'flag-sms-link': { title: 'O Link Falso', text: 'O site oficial é apenas "correios.com.br". Os golpistas criam sites falsos com nomes compridos como "correios-taxa-br" para roubar os dados do seu cartão.' },
-
-            'flag-social-sponsored': { title: 'É apenas um Anúncio!', text: 'A palavra "Patrocinado" significa que alguém PAGOU para isso aparecer para você. As redes sociais não verificam se a oferta é verdadeira antes de aceitar o dinheiro do anúncio.' },
-            'flag-social-deepfake': { title: 'Vídeo Falso (Deepfake)!', text: 'Hoje em dia, golpistas usam Inteligência Artificial para copiar o rosto e a voz exata de famosos no computador. Desconfie de vídeos maravilhosos.' },
-            'flag-social-link': { title: 'Para onde isso leva?', text: 'Nunca clique no botão "Saiba Mais" de promoções absurdas. Ele vai te levar para um site falso pedindo seus dados e seu cartão de crédito.' },
-            'flag-social-promise': { title: 'A Promessa Milagrosa', text: 'Ninguém dá celulares ou aparelhos de graça na internet! Se pedem para você pagar apenas o "frete" de um produto gratuito, é golpe na certa.' }
-        };
-
-        let currentLevelId = '';
-        let flagsFound = 0;
-        let totalFlagsCurrentLevel = 0;
-        let isVictoryModalOpen = false; 
-
-        // TOTAL DE NÍVEIS ATUAIS NO JOGO (Para calcular a porcentagem)
-        const TOTAL_NIVEIS_DO_JOGO = 4;
-
-        let gameState = JSON.parse(localStorage.getItem('defesaDigitalProgress')) || {
-            score: 0,
-            completedLevels: []
-        };
-
-        // --- ATUALIZAÇÃO DA INTERFACE PRINCIPAL ---
-        function updateDashboardUI() {
-            // Atualiza Pontos
-            document.getElementById('ui-global-score').innerText = gameState.score;
-            
-            // Atualiza Selos de Concluído
-            if (gameState.completedLevels.includes('fase-email-1')) document.getElementById('badge-email-1')?.classList.remove('hidden');
-            if (gameState.completedLevels.includes('fase-wpp-1')) document.getElementById('badge-wpp-1')?.classList.remove('hidden');
-            if (gameState.completedLevels.includes('fase-sms-1')) document.getElementById('badge-sms-1')?.classList.remove('hidden');
-            if (gameState.completedLevels.includes('fase-social-1')) document.getElementById('badge-social-1')?.classList.remove('hidden');
-
-            // Calcula e Atualiza a Barra de Progresso
-            let porcentagem = Math.round((gameState.completedLevels.length / TOTAL_NIVEIS_DO_JOGO) * 100);
-            
-            // Prevenção caso passemos do total (se adicionarmos mais fases depois)
-            if(porcentagem > 100) porcentagem = 100;
-            
-            document.getElementById('progress-percent').innerText = porcentagem + '%';
-            document.getElementById('progress-fill').style.width = porcentagem + '%';
-        }
-
-        function salvarProgresso() {
-            localStorage.setItem('defesaDigitalProgress', JSON.stringify(gameState));
-            updateDashboardUI();
-        }
-
-        // --- SISTEMA DE NAVEGAÇÃO POR CATEGORIAS ---
-        const titulosCategorias = {
-            'email': '✉️ Casos de E-mail',
-            'wpp': '💬 Casos de WhatsApp',
-            'sms': '📞 Ligações e SMS',
-            'social': '📱 Redes Sociais'
-        };
-
-        function abrirCategoria(categoriaId) {
-            // Esconde a tela de cartões e mostra a tela de níveis
-            document.getElementById('view-categories').classList.add('hidden');
-            document.getElementById('view-levels').classList.remove('hidden');
-            
-            // Troca o título
-            document.getElementById('current-category-title').innerText = titulosCategorias[categoriaId];
-
-            // Filtra os botões: esconde todos, mostra só os da categoria clicada
-            document.querySelectorAll('.level-btn').forEach(btn => {
-                if(btn.dataset.category === categoriaId) {
-                    btn.classList.remove('hidden');
-                } else {
-                    btn.classList.add('hidden');
-                }
-            });
-        }
-
-        function voltarParaCategorias() {
-            document.getElementById('view-levels').classList.add('hidden');
-            document.getElementById('view-categories').classList.remove('hidden');
-        }
-
-        // Inicializa a UI
-        updateDashboardUI();
-
-        // --- NAVEGAÇÃO DAS FASES ---
-        function abrirFase(idDaFase, totalDeFlags) {
-            currentLevelId = idDaFase;
-            flagsFound = 0;
-            totalFlagsCurrentLevel = totalDeFlags;
-            isVictoryModalOpen = false;
-            
-            document.getElementById('counter-' + currentLevelId).innerText = 0;
-            document.getElementById('screen-' + currentLevelId).querySelectorAll('.flag-found').forEach(item => {
-                item.classList.add('flag-target');
-                item.classList.remove('flag-found');
-            });
-
-            // Esconde o menu e mostra o nível
-            document.getElementById('screen-menu').classList.add('hidden');
-            document.getElementById('screen-' + currentLevelId).classList.remove('hidden');
-        }
-
-        function voltarAoMenu() {
-            // Esconde o nível e mostra o menu
-            document.getElementById('screen-' + currentLevelId).classList.add('hidden');
-            document.getElementById('screen-menu').classList.remove('hidden');
-            currentLevelId = '';
-        }
-
-        // --- CLIQUES E MODAL ---
-        document.querySelectorAll('.flag-target').forEach(item => {
-            item.addEventListener('click', function() {
-                const flagId = this.id; 
-                this.classList.add('flag-found');
-                this.classList.remove('flag-target'); 
-                flagsFound++;
-                document.getElementById('counter-' + currentLevelId).innerText = flagsFound;
-                
-                let btnHtml = `<button class="modal-btn" onclick="fecharModalNormal()">Entendi!</button>`;
-                showModal(explanations[flagId].title, explanations[flagId].text, '🚨', btnHtml);
-            });
-        });
-
-        const modal = document.getElementById('info-modal');
-
-        function showModal(title, text, icon, buttonsHTML) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-text').innerText = text;
-            document.getElementById('modal-icon').innerText = icon;
-            document.getElementById('modal-actions').innerHTML = buttonsHTML;
-            modal.classList.add('active'); 
-        }
-
-        // Usado pelo novo "X" moderno em SVG e pelo botão de Rever Sinais
-        function fecharModalSemAcao() {
-            modal.classList.remove('active');
-        }
-
-        function voltarAoMenuDaVitoria() {
-            fecharModalSemAcao();
-            voltarAoMenu();
-        }
-
-        function fecharModalNormal() {
-            modal.classList.remove('active'); 
-
-            if (flagsFound === totalFlagsCurrentLevel && !isVictoryModalOpen) {
-                isVictoryModalOpen = true; 
-                
-                if (!gameState.completedLevels.includes(currentLevelId)) {
-                    gameState.completedLevels.push(currentLevelId);
-                    gameState.score += 100;
-                    salvarProgresso();
-                }
-                
-                setTimeout(() => {
-                    let botoesVitoria = `
-                        <button class="modal-btn success" onclick="voltarAoMenuDaVitoria()">🏠 Voltar aos Níveis</button>
-                        <button class="modal-btn secondary" onclick="fecharModalSemAcao()">🔍 Rever Sinais na Fase</button>
-                    `;
-                    showModal('Muito Bem! 🏆', 'Você identificou todos os sinais e não caiu no golpe!', '🛡️', botoesVitoria);
-                }, 400); 
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
