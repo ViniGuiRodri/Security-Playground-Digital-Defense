@@ -24,7 +24,7 @@
 
         .app-container { width: 100%; max-width: 450px; background-color: var(--bg-card); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; height: 95vh; max-height: 850px; overflow: hidden; }
         .hidden { display: none !important; }
-        .game-screen { display: flex; flex-direction: column; flex: 1; height: 100%; overflow: hidden; }
+        .game-screen { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
 
         /* --- BARRA DO JOGO (HUD) --- */
         .game-hud { background-color: var(--game-bar-bg); color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; }
@@ -49,10 +49,10 @@
         .level-icon { font-size: 2rem; }
         .badge-done { background-color: #059669; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 12px; font-weight: bold; }
 
-        /* --- ESTILOS DAS FASES OMITIDOS PARA BREVIDADE (Mantive todos exatamente como estavam) --- */
+        /* --- FASES (E-mail, Wpp, SMS, Insta) --- */
         .gmail-header { padding: 15px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 1.2rem; flex-shrink: 0; }
         .gmail-header-icons { margin-left: auto; letter-spacing: 15px; }
-        .gmail-content { padding: 20px 20px 40px 20px; overflow-y: auto; flex: 1; background: white; }
+        .gmail-content { padding: 20px 20px 40px 20px; overflow-y: auto; flex: 1; background: white; min-height: 0; }
         .gmail-subject { font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; line-height: 1.3; color: var(--text-main); }
         .gmail-sender-row { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
         .gmail-avatar { width: 45px; height: 45px; background-color: var(--brand-streaming); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 500; font-size: 1.5rem; flex-shrink: 0; }
@@ -75,7 +75,7 @@
         .wpp-contact-name { font-weight: 500; font-size: 1.1rem; }
         .wpp-contact-status { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
         .wpp-header-icons { font-size: 1.2rem; display: flex; gap: 18px; align-items: center; }
-        .wpp-chat-area { flex: 1; padding: 15px 15px 20px 15px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; background-color: var(--wpp-bg); background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
+        .wpp-chat-area { flex: 1; padding: 15px 15px 20px 15px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; background-color: var(--wpp-bg); background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; min-height: 0; }
         .chat-bubble { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 1.05rem; line-height: 1.4; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); color: #111; }
         .chat-incoming { background-color: white; align-self: flex-start; border-top-left-radius: 0; }
         .chat-incoming::before { content: ""; position: absolute; top: 0; left: -8px; width: 0; height: 0; border-top: 0px solid transparent; border-bottom: 12px solid transparent; border-right: 12px solid white; }
@@ -92,7 +92,7 @@
         .sms-contact-name { font-weight: 700; font-size: 1.15rem; }
         .sms-contact-details { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
         .sms-header-icons { font-size: 1.3rem; display: flex; gap: 20px; color: var(--text-muted); }
-        .sms-container { background-color: var(--sms-bg); flex: 1; padding: 20px 20px 40px 20px; display: flex; flex-direction: column; overflow-y: auto; }
+        .sms-container { background-color: var(--sms-bg); flex: 1; padding: 20px 20px 40px 20px; display: flex; flex-direction: column; overflow-y: auto; min-height: 0; }
         .sms-date-divider { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 500; }
         .sms-bubble { background-color: var(--sms-bubble); color: #111; max-width: 85%; padding: 16px; border-radius: 20px; border-bottom-left-radius: 4px; font-size: 1.1rem; line-height: 1.5; align-self: flex-start; }
         .sms-link { color: var(--sms-blue); text-decoration: underline; font-weight: 500; word-break: break-all; }
@@ -103,7 +103,7 @@
 
         .social-header { background-color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; flex-shrink: 0; }
         .social-header-icons { display: flex; gap: 20px; font-size: 1.5rem; }
-        .social-feed { flex: 1; background-color: white; overflow-y: auto; padding-bottom: 40px; }
+        .social-feed { flex: 1; background-color: white; overflow-y: auto; padding-bottom: 150px; min-height: 0; }
         .social-post-header { padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
         .social-avatar { width: 40px; height: 40px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 50%; padding: 2px; flex-shrink: 0; }
         .social-avatar-inner { width: 100%; height: 100%; background-color: white; border-radius: 50%; border: 2px solid white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Check_green_icon.svg/1200px-Check_green_icon.svg.png'); background-size: cover; }
@@ -134,18 +134,21 @@
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
-        /* ADICIONADO: Posição relativa para o botão X poder ficar no canto absoluto */
-        .modal-content { position: relative; background-color: white; width: 100%; max-width: 450px; padding: 35px 30px 30px 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); }
+        .modal-content { position: relative; background-color: white; width: 100%; max-width: 450px; padding: 35px 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); }
         
-        /* ADICIONADO: O Botão Fechar "X" */
-        .modal-close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: var(--text-muted); cursor: pointer; line-height: 1; transition: color 0.2s; }
-        .modal-close-btn:hover { color: var(--brand-streaming); }
-
         .modal-icon { font-size: 3.5rem; margin-bottom: 15px; }
         .modal-title { font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 15px; }
-        .modal-text { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.6; text-align: left; }
-        .modal-btn { background-color: var(--accent-blue); color: white; border: none; padding: 18px 24px; border-radius: 12px; font-weight: 700; width: 100%; cursor: pointer; font-size: 1.2rem; }
+        .modal-text { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; text-align: left; }
+        
+        /* NOVO DESIGN DA ÁREA DE BOTÕES NO MODAL */
+        .modal-actions { display: flex; flex-direction: column; gap: 12px; }
+        .modal-btn { background-color: var(--accent-blue); color: white; border: none; padding: 16px 24px; border-radius: 12px; font-weight: 700; width: 100%; cursor: pointer; font-size: 1.15rem; transition: background 0.2s; }
+        .modal-btn:hover { opacity: 0.9; }
         .modal-btn.success { background-color: #059669; }
+        
+        /* Botão secundário vazado (Ghost Button) */
+        .modal-btn.secondary { background-color: transparent; color: var(--text-main); border: 2px solid var(--border-color); }
+        .modal-btn.secondary:hover { background-color: #f8f9fa; border-color: #cbd5e1;}
     </style>
 </head>
 <body>
@@ -338,12 +341,11 @@
 
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
-            <div class="modal-close-btn" onclick="fecharModalNoX()">&times;</div>
-            
             <div class="modal-icon" id="modal-icon">🚨</div>
             <h2 class="modal-title" id="modal-title">Título</h2>
             <p class="modal-text" id="modal-text">Texto explicativo.</p>
-            <button class="modal-btn" id="modal-btn" onclick="fecharEContinuar()">Entendi!</button>
+            
+            <div class="modal-actions" id="modal-actions"></div>
         </div>
     </div>
 
@@ -397,7 +399,6 @@
 
         updateDashboardUI();
 
-        // NAVEGAÇÃO
         function abrirFase(idDaFase, totalDeFlags) {
             currentLevelId = idDaFase;
             flagsFound = 0;
@@ -418,13 +419,8 @@
             document.getElementById('screen-' + currentLevelId).classList.add('hidden');
             document.getElementById('screen-menu').classList.remove('hidden');
             currentLevelId = '';
-            
-            // Restaura o estado normal do botão do modal caso o jogador saia pelo botão Sair da Fase
-            document.getElementById('modal-btn').onclick = fecharEContinuar;
-            document.getElementById('modal-btn').classList.remove('success');
         }
 
-        // CLIQUES
         document.querySelectorAll('.flag-target').forEach(item => {
             item.addEventListener('click', function() {
                 const flagId = this.id; 
@@ -432,50 +428,55 @@
                 this.classList.remove('flag-target'); 
                 flagsFound++;
                 document.getElementById('counter-' + currentLevelId).innerText = flagsFound;
-                showModal(explanations[flagId].title, explanations[flagId].text, '🚨', 'Entendi!');
+                
+                // Botão simples de "Entendi" para explicações normais
+                let btnHtml = `<button class="modal-btn" onclick="fecharModalNormal()">Entendi!</button>`;
+                showModal(explanations[flagId].title, explanations[flagId].text, '🚨', btnHtml);
             });
         });
 
-        // FUNÇÕES DO MODAL
         const modal = document.getElementById('info-modal');
-        const modalBtn = document.getElementById('modal-btn');
 
-        function showModal(title, text, icon, btnText) {
+        // Função para injetar as informações e os botões na janela (Modal)
+        function showModal(title, text, icon, buttonsHTML) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-text').innerText = text;
             document.getElementById('modal-icon').innerText = icon;
-            modalBtn.innerText = btnText;
+            document.getElementById('modal-actions').innerHTML = buttonsHTML;
             modal.classList.add('active'); 
         }
 
-        function fecharModalNoX() {
+        function fecharModalSemAcao() {
             modal.classList.remove('active');
         }
 
-        function fecharEContinuar() {
+        function voltarAoMenuDaVitoria() {
+            fecharModalSemAcao();
+            voltarAoMenu();
+        }
+
+        // Esta função roda quando o usuário clica em "Entendi!"
+        function fecharModalNormal() {
             modal.classList.remove('active'); 
 
+            // Checa se era o último erro da fase
             if (flagsFound === totalFlagsCurrentLevel && !isVictoryModalOpen) {
                 isVictoryModalOpen = true; 
                 
-                // Salva a pontuação EXATAMENTE na hora da vitória
+                // Salva os pontos na hora
                 if (!gameState.completedLevels.includes(currentLevelId)) {
                     gameState.completedLevels.push(currentLevelId);
                     gameState.score += 100;
                     salvarProgresso();
                 }
                 
+                // Abre a tela de vitória com os dois botões novos
                 setTimeout(() => {
-                    showModal('Muito Bem! 🏆', 'Você identificou todos os sinais e não caiu no golpe!\n\n(Você pode fechar esta janela no X para rever o nível ou clicar abaixo para sair).', '🛡️', 'Voltar ao Menu Principal');
-                    
-                    modalBtn.classList.add('success');
-                    modalBtn.onclick = function() {
-                        voltarAoMenu();
-                        modal.classList.remove('active'); 
-                        isVictoryModalOpen = false;
-                        modalBtn.onclick = fecharEContinuar; 
-                        modalBtn.classList.remove('success');
-                    };
+                    let botoesVitoria = `
+                        <button class="modal-btn success" onclick="voltarAoMenuDaVitoria()">🏠 Voltar ao Menu</button>
+                        <button class="modal-btn secondary" onclick="fecharModalSemAcao()">🔍 Rever Sinais na Fase</button>
+                    `;
+                    showModal('Muito Bem! 🏆', 'Você identificou todos os sinais e não caiu no golpe!', '🛡️', botoesVitoria);
                 }, 400); 
             }
         }
