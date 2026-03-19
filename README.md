@@ -1,7 +1,7 @@
 # Security-Playground
 # 🛡️ Digital Defense (Defesa Digital) - Educational Game
 
-**[Play](https://viniguirodri.github.io/Security-Playground/)**
+**[Play](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)**
 
 *Leia em Português abaixo / Read in Portuguese below*
 
@@ -25,7 +25,7 @@ Built with a focus on being lightweight and accessible, running directly in the 
 
 ## 🎮 Play now
 The game is live and can be played for free on desktop or mobile by clicking the link below:
-👉 **[Play Digital Defense](https://viniguirodri.github.io/Security-Playground/)**
+👉 **[Play Digital Defense](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)**
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ Projeto construído com foco em leveza e acessibilidade, rodando diretamente no 
 
 ## 🎮 Jogue agora
 O jogo está publicado e pode ser acessado gratuitamente pelo computador ou celular clicando no link abaixo:
-👉 **[Jogar Defesa Digital](https://viniguirodri.github.io/Security-Playground/)**
+👉 **[Jogar Defesa Digital](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)**
 
 ---
 *Status: Active Development*
