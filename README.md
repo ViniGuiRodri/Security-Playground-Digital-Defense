@@ -1,9 +1,9 @@
 # Security-Playground
 # 🛡️ Digital Defense (Defesa Digital) - Educational Game
 
-**[Play](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)**
+[![Play Now](https://img.shields.io/badge/🎮_JOGAR_AGORA-059669?style=for-the-badge)](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)
 
-*Leia em Português abaixo / Read in Portuguese below*
+*Português abaixo / Portuguese below*
 
 **Digital Defense** is an interactive web app created to teach information security in a practical and accessible way. The main goal of the project is to help people (especially audiences less familiar with technology, such as the elderly) identify everyday digital scams before they become victims.
 
