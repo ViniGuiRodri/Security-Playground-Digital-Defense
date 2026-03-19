@@ -32,15 +32,37 @@
         .btn-back:hover { background: rgba(255,255,255,0.3); }
         .score-badge { font-weight: 700; font-size: 1rem; background-color: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 15px; }
 
-        /* --- DASHBOARD (MENU) --- */
+        /* --- DASHBOARD (MENU PRINCIPAL) --- */
         #screen-menu { background: #1e293b; color: white; overflow-y: auto; }
-        .hq-header { padding: 40px 20px 20px; text-align: center; flex-shrink: 0; }
-        .menu-logo { font-size: 4rem; margin-bottom: 10px; }
-        .menu-title { font-size: 2rem; font-weight: 700; color: #ffffff; line-height: 1.2; }
-        .global-score { background-color: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 30px; display: inline-block; margin-top: 15px; font-weight: 700; font-size: 1.2rem; color: #fbbf24; border: 2px solid rgba(251, 191, 36, 0.4); }
+        .hq-header { padding: 30px 20px 20px; text-align: center; flex-shrink: 0; }
+        .menu-logo { font-size: 3.5rem; margin-bottom: 5px; }
+        .menu-title { font-size: 1.8rem; font-weight: 700; color: #ffffff; line-height: 1.2; }
+        .global-score { background-color: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 30px; display: inline-block; margin-top: 15px; font-weight: 700; font-size: 1.1rem; color: #fbbf24; border: 2px solid rgba(251, 191, 36, 0.4); }
+        
         .missions-container { background-color: var(--bg-card); border-radius: 25px 25px 0 0; padding: 25px; color: var(--text-main); min-height: 100%; }
-        .category-title { font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 15px; margin-top: 25px; border-bottom: 2px solid var(--border-color); padding-bottom: 5px; }
-        .category-title:first-child { margin-top: 0; }
+        
+        /* BARRA DE PROGRESSO GLOBAL */
+        .progress-section { margin-bottom: 25px; background-color: #f8f9fa; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .progress-text { font-weight: 700; color: var(--text-main); font-size: 1.05rem; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;}
+        .progress-percent-badge { background-color: var(--accent-blue); color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.9rem; }
+        .progress-bar-bg { width: 100%; height: 12px; background-color: #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background-color: #059669; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* CARDS DE CATEGORIA */
+        .category-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .category-card { background-color: white; border: 2px solid var(--border-color); border-radius: 16px; padding: 18px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: all 0.2s; }
+        .category-card:hover { border-color: var(--accent-blue); background-color: #eff6ff; transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .category-icon { font-size: 2.2rem; background: #f1f5f9; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
+        .category-info { flex: 1; }
+        .category-name { font-weight: 700; font-size: 1.2rem; color: var(--text-main); margin-bottom: 4px; }
+        .category-meta { font-size: 0.9rem; color: var(--text-muted); }
+        .category-arrow { font-size: 1.2rem; color: var(--text-muted); font-weight: bold; }
+
+        /* LISTA DE NÍVEIS (Dentro da Categoria) */
+        .category-title { font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .btn-back-cat { background: #f1f5f9; border: none; color: var(--text-main); font-size: 1rem; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; font-weight: 600; margin-bottom: 20px; transition: background 0.2s; }
+        .btn-back-cat:hover { background: #e2e8f0; }
+
         .level-btn { background-color: white; border: 2px solid var(--border-color); padding: 20px; border-radius: 16px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }
         .level-btn:hover { border-color: var(--accent-blue); background-color: #eff6ff; }
         .level-info { display: flex; flex-direction: column; }
@@ -49,7 +71,7 @@
         .level-icon { font-size: 2rem; }
         .badge-done { background-color: #059669; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 12px; font-weight: bold; }
 
-        /* --- FASES (E-mail, Wpp, SMS, Insta) --- */
+        /* --- FASES OMITIDAS NO CSS (Mantidas como estavam) --- */
         .gmail-header { padding: 15px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 1.2rem; flex-shrink: 0; }
         .gmail-header-icons { margin-left: auto; letter-spacing: 15px; }
         .gmail-content { padding: 20px 20px 40px 20px; overflow-y: auto; flex: 1; background: white; min-height: 0; }
@@ -134,19 +156,20 @@
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
-        .modal-content { position: relative; background-color: white; width: 100%; max-width: 450px; padding: 35px 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); }
+        .modal-content { position: relative; background-color: white; width: 100%; max-width: 450px; padding: 40px 30px 30px 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2); }
         
+        /* NOVO ÍCONE DE FECHAR (Moderno, estilo App) */
+        .modal-close-icon { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #94a3b8; cursor: pointer; border-radius: 50%; width: 36px; height: 36px; display: flex; justify-content: center; align-items: center; transition: all 0.2s; }
+        .modal-close-icon:hover { background-color: #f1f5f9; color: var(--text-main); }
+
         .modal-icon { font-size: 3.5rem; margin-bottom: 15px; }
         .modal-title { font-size: 1.6rem; font-weight: 700; color: var(--text-main); margin-bottom: 15px; }
         .modal-text { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; text-align: left; }
         
-        /* NOVO DESIGN DA ÁREA DE BOTÕES NO MODAL */
         .modal-actions { display: flex; flex-direction: column; gap: 12px; }
         .modal-btn { background-color: var(--accent-blue); color: white; border: none; padding: 16px 24px; border-radius: 12px; font-weight: 700; width: 100%; cursor: pointer; font-size: 1.15rem; transition: background 0.2s; }
         .modal-btn:hover { opacity: 0.9; }
         .modal-btn.success { background-color: #059669; }
-        
-        /* Botão secundário vazado (Ghost Button) */
         .modal-btn.secondary { background-color: transparent; color: var(--text-main); border: 2px solid var(--border-color); }
         .modal-btn.secondary:hover { background-color: #f8f9fa; border-color: #cbd5e1;}
     </style>
@@ -163,41 +186,98 @@
             </div>
             
             <div class="missions-container">
-                <h2 class="category-title">✉️ Aplicativo de E-mail</h2>
-                <button class="level-btn" id="btn-fase-email-1" onclick="abrirFase('fase-email-1', 4)">
-                    <div class="level-info">
-                        <span class="level-name">Caso #01: A Mensalidade <span id="badge-email-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                        <span class="level-desc">E-mail dizendo que sua conta foi suspensa.</span>
+                
+                <div id="view-categories">
+                    <div class="progress-section">
+                        <div class="progress-text">
+                            Progresso do Jogo
+                            <span class="progress-percent-badge" id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progress-fill"></div>
+                        </div>
                     </div>
-                    <div class="level-icon">▶️</div>
-                </button>
 
-                <h2 class="category-title">💬 WhatsApp</h2>
-                <button class="level-btn" id="btn-fase-wpp-1" onclick="abrirFase('fase-wpp-1', 6)">
-                    <div class="level-info">
-                        <span class="level-name">Caso #02: Novo Número <span id="badge-wpp-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                        <span class="level-desc">Alguém pedindo dinheiro de um número estranho.</span>
-                    </div>
-                    <div class="level-icon">▶️</div>
-                </button>
+                    <h2 class="category-title">Escolha um Tema:</h2>
+                    
+                    <div class="category-grid">
+                        <div class="category-card" onclick="abrirCategoria('email')">
+                            <div class="category-icon">✉️</div>
+                            <div class="category-info">
+                                <div class="category-name">E-mails</div>
+                                <div class="category-meta">1 Nível Disponível</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
 
-                <h2 class="category-title">📞 Ligações e SMS</h2>
-                <button class="level-btn" id="btn-fase-sms-1" onclick="abrirFase('fase-sms-1', 3)">
-                    <div class="level-info">
-                        <span class="level-name">Caso #03: A Encomenda <span id="badge-sms-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                        <span class="level-desc">Um SMS cobrando taxa da Alfândega/Correios.</span>
-                    </div>
-                    <div class="level-icon">▶️</div>
-                </button>
+                        <div class="category-card" onclick="abrirCategoria('wpp')">
+                            <div class="category-icon">💬</div>
+                            <div class="category-info">
+                                <div class="category-name">WhatsApp</div>
+                                <div class="category-meta">1 Nível Disponível</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
 
-                <h2 class="category-title">📱 Redes Sociais</h2>
-                <button class="level-btn" id="btn-fase-social-1" onclick="abrirFase('fase-social-1', 4)">
-                    <div class="level-info">
-                        <span class="level-name">Caso #04: O Falso Famoso <span id="badge-social-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                        <span class="level-desc">Vídeo criado por Inteligência Artificial (Deepfake).</span>
+                        <div class="category-card" onclick="abrirCategoria('sms')">
+                            <div class="category-icon">📞</div>
+                            <div class="category-info">
+                                <div class="category-name">Ligações e SMS</div>
+                                <div class="category-meta">1 Nível Disponível</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
+
+                        <div class="category-card" onclick="abrirCategoria('social')">
+                            <div class="category-icon">📱</div>
+                            <div class="category-info">
+                                <div class="category-name">Redes Sociais</div>
+                                <div class="category-meta">1 Nível Disponível</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
                     </div>
-                    <div class="level-icon">▶️</div>
-                </button>
+                </div>
+
+                <div id="view-levels" class="hidden">
+                    <button class="btn-back-cat" onclick="voltarParaCategorias()">⬅ Voltar</button>
+                    <h2 class="category-title" id="current-category-title">Níveis</h2>
+                    
+                    <div id="level-list">
+                        <button class="level-btn" data-category="email" id="btn-fase-email-1" onclick="abrirFase('fase-email-1', 4)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #01: A Mensalidade <span id="badge-email-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">E-mail dizendo que sua conta foi suspensa.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <button class="level-btn" data-category="wpp" id="btn-fase-wpp-1" onclick="abrirFase('fase-wpp-1', 6)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #02: Novo Número <span id="badge-wpp-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Alguém pedindo dinheiro de um número estranho.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <button class="level-btn" data-category="sms" id="btn-fase-sms-1" onclick="abrirFase('fase-sms-1', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #03: A Encomenda <span id="badge-sms-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Um SMS cobrando taxa da Alfândega/Correios.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <button class="level-btn" data-category="social" id="btn-fase-social-1" onclick="abrirFase('fase-social-1', 4)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #04: O Falso Famoso <span id="badge-social-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Vídeo criado por Inteligência Artificial (Deepfake).</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -341,6 +421,14 @@
 
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
+            
+            <button class="modal-close-icon" onclick="fecharModalSemAcao()" aria-label="Fechar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
             <div class="modal-icon" id="modal-icon">🚨</div>
             <h2 class="modal-title" id="modal-title">Título</h2>
             <p class="modal-text" id="modal-text">Texto explicativo.</p>
@@ -379,17 +467,33 @@
         let totalFlagsCurrentLevel = 0;
         let isVictoryModalOpen = false; 
 
+        // TOTAL DE NÍVEIS ATUAIS NO JOGO (Para calcular a porcentagem)
+        const TOTAL_NIVEIS_DO_JOGO = 4;
+
         let gameState = JSON.parse(localStorage.getItem('defesaDigitalProgress')) || {
             score: 0,
             completedLevels: []
         };
 
+        // --- ATUALIZAÇÃO DA INTERFACE PRINCIPAL ---
         function updateDashboardUI() {
+            // Atualiza Pontos
             document.getElementById('ui-global-score').innerText = gameState.score;
+            
+            // Atualiza Selos de Concluído
             if (gameState.completedLevels.includes('fase-email-1')) document.getElementById('badge-email-1')?.classList.remove('hidden');
             if (gameState.completedLevels.includes('fase-wpp-1')) document.getElementById('badge-wpp-1')?.classList.remove('hidden');
             if (gameState.completedLevels.includes('fase-sms-1')) document.getElementById('badge-sms-1')?.classList.remove('hidden');
             if (gameState.completedLevels.includes('fase-social-1')) document.getElementById('badge-social-1')?.classList.remove('hidden');
+
+            // Calcula e Atualiza a Barra de Progresso
+            let porcentagem = Math.round((gameState.completedLevels.length / TOTAL_NIVEIS_DO_JOGO) * 100);
+            
+            // Prevenção caso passemos do total (se adicionarmos mais fases depois)
+            if(porcentagem > 100) porcentagem = 100;
+            
+            document.getElementById('progress-percent').innerText = porcentagem + '%';
+            document.getElementById('progress-fill').style.width = porcentagem + '%';
         }
 
         function salvarProgresso() {
@@ -397,8 +501,41 @@
             updateDashboardUI();
         }
 
+        // --- SISTEMA DE NAVEGAÇÃO POR CATEGORIAS ---
+        const titulosCategorias = {
+            'email': '✉️ Casos de E-mail',
+            'wpp': '💬 Casos de WhatsApp',
+            'sms': '📞 Ligações e SMS',
+            'social': '📱 Redes Sociais'
+        };
+
+        function abrirCategoria(categoriaId) {
+            // Esconde a tela de cartões e mostra a tela de níveis
+            document.getElementById('view-categories').classList.add('hidden');
+            document.getElementById('view-levels').classList.remove('hidden');
+            
+            // Troca o título
+            document.getElementById('current-category-title').innerText = titulosCategorias[categoriaId];
+
+            // Filtra os botões: esconde todos, mostra só os da categoria clicada
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                if(btn.dataset.category === categoriaId) {
+                    btn.classList.remove('hidden');
+                } else {
+                    btn.classList.add('hidden');
+                }
+            });
+        }
+
+        function voltarParaCategorias() {
+            document.getElementById('view-levels').classList.add('hidden');
+            document.getElementById('view-categories').classList.remove('hidden');
+        }
+
+        // Inicializa a UI
         updateDashboardUI();
 
+        // --- NAVEGAÇÃO DAS FASES ---
         function abrirFase(idDaFase, totalDeFlags) {
             currentLevelId = idDaFase;
             flagsFound = 0;
@@ -411,16 +548,19 @@
                 item.classList.remove('flag-found');
             });
 
+            // Esconde o menu e mostra o nível
             document.getElementById('screen-menu').classList.add('hidden');
             document.getElementById('screen-' + currentLevelId).classList.remove('hidden');
         }
 
         function voltarAoMenu() {
+            // Esconde o nível e mostra o menu
             document.getElementById('screen-' + currentLevelId).classList.add('hidden');
             document.getElementById('screen-menu').classList.remove('hidden');
             currentLevelId = '';
         }
 
+        // --- CLIQUES E MODAL ---
         document.querySelectorAll('.flag-target').forEach(item => {
             item.addEventListener('click', function() {
                 const flagId = this.id; 
@@ -429,7 +569,6 @@
                 flagsFound++;
                 document.getElementById('counter-' + currentLevelId).innerText = flagsFound;
                 
-                // Botão simples de "Entendi" para explicações normais
                 let btnHtml = `<button class="modal-btn" onclick="fecharModalNormal()">Entendi!</button>`;
                 showModal(explanations[flagId].title, explanations[flagId].text, '🚨', btnHtml);
             });
@@ -437,7 +576,6 @@
 
         const modal = document.getElementById('info-modal');
 
-        // Função para injetar as informações e os botões na janela (Modal)
         function showModal(title, text, icon, buttonsHTML) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-text').innerText = text;
@@ -446,6 +584,7 @@
             modal.classList.add('active'); 
         }
 
+        // Usado pelo novo "X" moderno em SVG e pelo botão de Rever Sinais
         function fecharModalSemAcao() {
             modal.classList.remove('active');
         }
@@ -455,25 +594,21 @@
             voltarAoMenu();
         }
 
-        // Esta função roda quando o usuário clica em "Entendi!"
         function fecharModalNormal() {
             modal.classList.remove('active'); 
 
-            // Checa se era o último erro da fase
             if (flagsFound === totalFlagsCurrentLevel && !isVictoryModalOpen) {
                 isVictoryModalOpen = true; 
                 
-                // Salva os pontos na hora
                 if (!gameState.completedLevels.includes(currentLevelId)) {
                     gameState.completedLevels.push(currentLevelId);
                     gameState.score += 100;
                     salvarProgresso();
                 }
                 
-                // Abre a tela de vitória com os dois botões novos
                 setTimeout(() => {
                     let botoesVitoria = `
-                        <button class="modal-btn success" onclick="voltarAoMenuDaVitoria()">🏠 Voltar ao Menu</button>
+                        <button class="modal-btn success" onclick="voltarAoMenuDaVitoria()">🏠 Voltar aos Níveis</button>
                         <button class="modal-btn secondary" onclick="fecharModalSemAcao()">🔍 Rever Sinais na Fase</button>
                     `;
                     showModal('Muito Bem! 🏆', 'Você identificou todos os sinais e não caiu no golpe!', '🛡️', botoesVitoria);
