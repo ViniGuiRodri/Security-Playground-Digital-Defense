@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Disable auto-linking of phone numbers on mobile -->
+    <meta name="format-detection" content="telephone=no">
     <title>Defesa Digital - Jogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,7 +21,9 @@
                 </div>
                 <div class="hq-actions-group">
                     <div class="global-score"><span id="ui-global-score">0</span> pts</div>
-                    <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar">
+                    <!-- Dark/Light Mode Toggle -->
+                    <button class="btn-help" onclick="alternarTema()" aria-label="Mudar Tema" title="Modo Claro/Escuro">🌓</button>
+                    <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar" title="Ajuda">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
@@ -31,7 +34,6 @@
             </div>
             
             <div class="missions-container">
-                
                 <div id="view-categories">
                     <div class="progress-section">
                         <div class="progress-text">
@@ -50,7 +52,7 @@
                             <div class="category-icon">✉️</div>
                             <div class="category-info">
                                 <div class="category-name">E-mails Falsos</div>
-                                <div class="category-meta" id="prog-cat-email">0/1 Níveis Concluídos</div>
+                                <div class="category-meta" id="prog-cat-email">0/2 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -59,7 +61,7 @@
                             <div class="category-icon">💬</div>
                             <div class="category-info">
                                 <div class="category-name">Golpes no WhatsApp</div>
-                                <div class="category-meta" id="prog-cat-wpp">0/1 Níveis Concluídos</div>
+                                <div class="category-meta" id="prog-cat-wpp">0/2 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -68,7 +70,7 @@
                             <div class="category-icon">📞</div>
                             <div class="category-info">
                                 <div class="category-name">Ligações e SMS</div>
-                                <div class="category-meta" id="prog-cat-sms">0/1 Níveis Concluídos</div>
+                                <div class="category-meta" id="prog-cat-sms">0/2 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -76,8 +78,36 @@
                         <div class="category-card" onclick="abrirCategoria('social')">
                             <div class="category-icon">📱</div>
                             <div class="category-info">
-                                <div class="category-name">Redes Sociais (IA)</div>
-                                <div class="category-meta" id="prog-cat-social">0/1 Níveis Concluídos</div>
+                                <div class="category-name">Redes Sociais</div>
+                                <div class="category-meta" id="prog-cat-social">0/2 Níveis Concluídos</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
+
+                        <!-- NEW CATEGORIES -->
+                        <div class="category-card" onclick="abrirCategoria('dating')">
+                            <div class="category-icon">❤️</div>
+                            <div class="category-info">
+                                <div class="category-name">Relacionamentos</div>
+                                <div class="category-meta" id="prog-cat-dating">0/1 Níveis Concluídos</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
+
+                        <div class="category-card" onclick="abrirCategoria('apps')">
+                            <div class="category-icon">🛒</div>
+                            <div class="category-info">
+                                <div class="category-name">Lojas de Aplicativos</div>
+                                <div class="category-meta" id="prog-cat-apps">0/1 Níveis Concluídos</div>
+                            </div>
+                            <div class="category-arrow">❯</div>
+                        </div>
+
+                        <div class="category-card" onclick="abrirCategoria('voice')">
+                            <div class="category-icon">🎙️</div>
+                            <div class="category-info">
+                                <div class="category-name">Chamadas de Voz</div>
+                                <div class="category-meta" id="prog-cat-voice">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
                         </div>
@@ -89,128 +119,163 @@
                     <h2 class="category-title" id="current-category-title">Níveis</h2>
                     
                     <div id="level-list">
+                        <!-- EMAIL LEVELS -->
                         <button class="level-btn" data-category="email" id="btn-fase-email-1" onclick="abrirFase('fase-email-1', 4)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: A Mensalidade <span id="badge-email-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Sua assinatura foi suspensa hoje.</span>
+                                <span class="level-desc">Assinatura suspensa.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+                        <button class="level-btn" data-category="email" id="btn-fase-email-2" onclick="abrirFase('fase-email-2', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #02: Bloqueio no Banco <span id="badge-email-2" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Atualize seu token de segurança.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
 
+                        <!-- WHATSAPP LEVELS -->
                         <button class="level-btn" data-category="wpp" id="btn-fase-wpp-1" onclick="abrirFase('fase-wpp-1', 6)">
                             <div class="level-info">
-                                <span class="level-name">Caso #02: Novo Número <span id="badge-wpp-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-name">Caso #01: Novo Número <span id="badge-wpp-1" class="hidden badge-done">CONCLUÍDO</span></span>
                                 <span class="level-desc">Oi mãe! Esse é meu provisório.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
-
-                        <button class="level-btn" data-category="sms" id="btn-fase-sms-1" onclick="abrirFase('fase-sms-1', 3)">
+                        <button class="level-btn" data-category="wpp" id="btn-fase-wpp-2" onclick="abrirFase('fase-wpp-2', 3)">
                             <div class="level-info">
-                                <span class="level-name">Caso #03: A Encomenda <span id="badge-sms-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Pague a taxa ou perca o pacote.</span>
+                                <span class="level-name">Caso #02: Emprego Fácil <span id="badge-wpp-2" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Ganhe 1.000 reais por dia.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
 
+                        <!-- SMS LEVELS -->
+                        <button class="level-btn" data-category="sms" id="btn-fase-sms-1" onclick="abrirFase('fase-sms-1', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #01: A Encomenda <span id="badge-sms-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Pague a taxa dos Correios.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+                        <button class="level-btn" data-category="sms" id="btn-fase-sms-2" onclick="abrirFase('fase-sms-2', 2)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #02: Compra Suspeita <span id="badge-sms-2" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Aviso falso de compra no cartão.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <!-- SOCIAL MEDIA LEVELS -->
                         <button class="level-btn" data-category="social" id="btn-fase-social-1" onclick="abrirFase('fase-social-1', 4)">
                             <div class="level-info">
-                                <span class="level-name">Caso #04: O Falso Famoso <span id="badge-social-1" class="hidden badge-done">CONCLUÍDO</span></span>
-                                <span class="level-desc">Vídeo criado por IA (Deepfake).</span>
+                                <span class="level-name">Caso #01: O Falso Famoso <span id="badge-social-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Governo libera celulares grátis.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+                        <button class="level-btn" data-category="social" id="btn-fase-social-2" onclick="abrirFase('fase-social-2', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #02: A Super Promoção <span id="badge-social-2" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Oferta imperdível com 90% OFF.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <!-- NEW: DATING SCAM -->
+                        <button class="level-btn" data-category="dating" id="btn-fase-dating-1" onclick="abrirFase('fase-dating-1', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #01: Amor Virtual <span id="badge-dating-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Meu cartão foi bloqueado!</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <!-- NEW: APP SCAM -->
+                        <button class="level-btn" data-category="apps" id="btn-fase-apps-1" onclick="abrirFase('fase-apps-1', 3)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #01: App do Banco <span id="badge-apps-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Baixando a nova versão.</span>
+                            </div>
+                            <div class="level-icon">▶️</div>
+                        </button>
+
+                        <!-- NEW: VOICE SCAM -->
+                        <button class="level-btn" data-category="voice" id="btn-fase-voice-1" onclick="abrirFase('fase-voice-1', 2)">
+                            <div class="level-info">
+                                <span class="level-name">Caso #01: A Falsa Central <span id="badge-voice-1" class="hidden badge-done">CONCLUÍDO</span></span>
+                                <span class="level-desc">Transferência suspeita detectada.</span>
                             </div>
                             <div class="level-icon">▶️</div>
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
 
+        <!-- ================= EXISTING LEVELS ================= -->
         <div id="screen-fase-email-1" class="hidden game-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair da Fase</button>
-                <div class="score-badge">Erros: <span id="counter-fase-email-1">0</span>/4</div>
-            </div>
-            <div class="gmail-header">
-                <span>←</span><span class="gmail-header-icons">🗑️ ✉️ ⋮</span>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()" title="Pedir Dica">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-email-1">0</span>/4</div>
+                </div>
             </div>
             <div class="gmail-content">
                 <h1 class="gmail-subject"><span class="flag-target" id="flag-urgency">URGENTE: Sua assinatura foi suspensa hoje.</span></h1>
                 <div class="gmail-sender-row">
                     <div class="gmail-avatar">N</div>
                     <div class="gmail-sender-info">
-                        <div class="gmail-sender-name">NetFlix Suporte <span class="gmail-date">10:35</span></div>
-                        <div class="gmail-sender-email flag-target" id="flag-domain">pagamentos@suporte-netfiix.com.br <span class="gmail-to">para mim ▾</span></div>
+                        <div class="gmail-sender-name">NetFlix Suporte</div>
+                        <div class="gmail-sender-email flag-target" id="flag-domain">pagamentos@suporte-netfiix.com.br</div>
                     </div>
                 </div>
                 <div class="streaming-template">
-                    <div class="streaming-logo">NETFLIX</div>
                     <p><span class="flag-target" id="flag-greeting">Olá Cliente,</span></p>
-                    <p>Infelizmente, não conseguimos processar o pagamento da sua última mensalidade. Como resultado, o acesso aos seus filmes e séries foi temporariamente suspenso.</p>
-                    <p>Para restaurar seu acesso imediatamente, por favor, atualize seus dados clicando no botão abaixo:</p>
+                    <p>Infelizmente, não conseguimos processar o pagamento da sua última mensalidade.</p>
                     <a class="btn-streaming flag-target" id="flag-link">ATUALIZAR MEU PAGAMENTO</a>
-                </div>
-                <div class="gmail-footer-actions">
-                    <div class="gmail-action-btn">↩️ Responder</div>
-                    <div class="gmail-action-btn">↪️ Encaminhar</div>
                 </div>
             </div>
         </div>
 
         <div id="screen-fase-wpp-1" class="hidden game-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair da Fase</button>
-                <div class="score-badge">Erros: <span id="counter-fase-wpp-1">0</span>/6</div>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-wpp-1">0</span>/6</div>
+                </div>
             </div>
             <header class="wpp-header-real">
-                <span class="wpp-header-back">←</span>
                 <div class="wpp-avatar-real flag-target" id="flag-wpp-photo">👤</div>
                 <div class="wpp-contact-info">
                     <div class="wpp-contact-name flag-target" id="flag-wpp-header-number">+55 11 9999-8888</div>
-                    <div class="wpp-contact-status">online</div>
                 </div>
-                <div class="wpp-header-icons"><span>🎥</span> <span>📞</span> <span>⋮</span></div>
             </header>
             <div class="wpp-chat-area">
-                <div class="chat-bubble chat-incoming">
-                    <span class="flag-target" id="flag-wpp-text">Oi mãe! Meu celular caiu na água e estragou. Peguei esse provisório, anota meu número novo aí.</span>
-                    <div class="chat-meta"><span class="chat-time">14:05</span></div>
-                </div>
-                <div class="chat-bubble chat-incoming">
-                    <span class="flag-target" id="flag-wpp-urgency">Tô precisando de um favor urgente. Meu aplicativo do banco bloqueou no celular novo e preciso pagar uma conta hoje ainda.</span>
-                    <div class="chat-meta"><span class="chat-time">14:06</span></div>
-                </div>
-                <div class="chat-bubble chat-incoming">
-                    <span class="flag-target" id="flag-wpp-pix">Tem como você fazer um PIX de R$ 850 pra mim? Amanhã cedo eu vou no banco desbloquear e te devolvo.</span>
-                    <div class="chat-meta"><span class="chat-time">14:07</span></div>
-                </div>
-                <div class="chat-bubble chat-incoming">
-                    <span class="flag-target" id="flag-wpp-thirdparty">A chave PIX é o celular dele: 11977776666<br><br>Nome: Marcos Silva Junior</span>
-                    <div class="chat-meta"><span class="chat-time">14:08</span></div>
-                </div>
-            </div>
-            <div class="wpp-input-area">
-                <div class="wpp-input-box"><span>😀</span> <span>Mensagem</span> <div class="wpp-input-icons"><span>📎</span> <span>📷</span></div></div>
-                <div class="wpp-mic-btn">🎙️</div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-text">Oi mãe! Meu celular estragou. Peguei esse provisório.</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-urgency">Tô precisando de um favor urgente. Meu aplicativo do banco bloqueou.</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-pix">Tem como fazer um PIX de R$ 850 pra mim?</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-thirdparty">A chave PIX é o celular dele: 11977776666<br>Nome: Marcos Silva Junior</span></div>
             </div>
         </div>
 
         <div id="screen-fase-sms-1" class="hidden game-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair da Fase</button>
-                <div class="score-badge">Erros: <span id="counter-fase-sms-1">0</span>/3</div>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-sms-1">0</span>/3</div>
+                </div>
             </div>
             <div class="sms-header">
-                <span>←</span>
-                <div class="sms-avatar">?</div>
                 <div class="sms-contact-info">
                     <div class="sms-contact-name flag-target" id="flag-sms-sender">+55 21 98888-7777</div>
-                    <div class="sms-contact-details">Adicionar aos contatos</div>
                 </div>
-                <div class="sms-header-icons"><span>📞</span> <span>🔍</span> <span>⋮</span></div>
             </div>
             <div class="sms-container">
-                <div class="sms-date-divider">Hoje, 11:20</div>
                 <div class="sms-bubble">
                     CORREIOS: O seu pacote foi barrado na Alfândega. <br><br>
                     <span class="flag-target" id="flag-sms-urgency">Para não perder a encomenda, pague a taxa de liberação hoje.</span> <br><br>
@@ -218,30 +283,22 @@
                     <span class="flag-target sms-link" id="flag-sms-link">https://correios-taxa-br-gov.com/rastreio</span>
                 </div>
             </div>
-            <div class="sms-input-area">
-                <div class="sms-input-plus">+</div>
-                <div class="sms-input-box">Mensagem de texto</div>
-                <div class="sms-send-btn">▶</div>
-            </div>
         </div>
 
         <div id="screen-fase-social-1" class="hidden game-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair da Fase</button>
-                <div class="score-badge">Erros: <span id="counter-fase-social-1">0</span>/4</div>
-            </div>
-            <div class="social-header">
-                InstaSocial
-                <div class="social-header-icons"><span>♡</span> <span>✉️</span></div>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-social-1">0</span>/4</div>
+                </div>
             </div>
             <div class="social-feed">
                 <div class="social-post-header">
-                    <div class="social-avatar"><div class="social-avatar-inner">📰</div></div>
                     <div class="social-user-info">
                         <div class="social-username">Notícias Oficiais ✔️</div>
                         <div class="social-sponsored flag-target" id="flag-social-sponsored">Patrocinado</div>
                     </div>
-                    <div class="social-options">⋮</div>
                 </div>
                 <div class="social-post-media">
                     <div class="social-video-bg"></div>
@@ -252,13 +309,200 @@
                     <div class="social-cta-text">resgate-oficial-br.com</div>
                     <button class="social-cta-btn flag-target" id="flag-social-link">Saiba mais ❯</button>
                 </div>
-                <div class="social-post-actions"><span>♡</span> <span>💬</span> <span>✈️</span></div>
-                <div class="social-likes">8.452 curtidas</div>
                 <div class="social-caption">
                     <strong>Notícias Oficiais</strong> <br>
-                    <span class="flag-target" id="flag-social-promise">URGENTE: O Governo Federal acaba de liberar um lote de celulares NOVOS totalmente de graça para nascidos entre 1950 e 1980!</span> Clique em "Saiba Mais" para ver se o seu CPF tem direito. Pague apenas a taxa do Correio.
+                    <span class="flag-target" id="flag-social-promise">URGENTE: O Governo acaba de liberar um lote de celulares NOVOS totalmente de graça para nascidos entre 1950 e 1980!</span> Pague apenas a taxa do Correio.
                 </div>
-                <div class="social-comments">Os comentários estão desativados.</div>
+            </div>
+        </div>
+
+        <div id="screen-fase-email-2" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-email-2">0</span>/3</div>
+                </div>
+            </div>
+            <div class="gmail-content">
+                <h1 class="gmail-subject">Aviso de Segurança: Módulo Desatualizado</h1>
+                <div class="gmail-sender-row">
+                    <div class="gmail-avatar" style="background: #fbbf24; color: black;">B</div>
+                    <div class="gmail-sender-info">
+                        <div class="gmail-sender-name">Banco BrasiI</div>
+                        <div class="gmail-sender-email flag-target" id="flag-email2-domain">seguranca@bb-atualizacao-info.net</div>
+                    </div>
+                </div>
+                <div class="streaming-template" style="background: #f8f9fa; color: #111; border: 1px solid #ddd;">
+                    <p>Prezado Cliente,</p>
+                    <p><span class="flag-target" id="flag-email2-urgency">Notamos um acesso suspeito. Sua conta será BLOQUEADA em 2 horas caso não atualize seu Token de Segurança.</span></p>
+                    <p>Para evitar multas e o bloqueio dos seus cartões, sincronize seu aparelho imediatamente clicando no botão seguro abaixo:</p>
+                    <a class="btn-streaming flag-target" id="flag-email2-link" style="background: #0b57d0;">SINCRONIZAR MEU TOKEN AGORA</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-fase-wpp-2" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-wpp-2">0</span>/3</div>
+                </div>
+            </div>
+            <header class="wpp-header-real">
+                <div class="wpp-avatar-real" style="background: #25D366; color:white;">A</div>
+                <div class="wpp-contact-info">
+                    <div class="wpp-contact-name flag-target" id="flag-wpp2-number">+62 812-3456-7890</div>
+                    <div class="wpp-contact-status">Conta Comercial</div>
+                </div>
+            </header>
+            <div class="wpp-chat-area">
+                <div class="chat-bubble chat-incoming">Olá! Sou diretora de contratação do Mercado Livre e da Amazon.</div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-salary">Estamos recrutando pessoas para um trabalho de meio período curtindo e avaliando produtos. Você pode ganhar de R$ 500 a R$ 1.500 por dia pelo celular.</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-fee">As vagas são limitadas! Para confirmar sua inscrição e começar a receber hoje, precisamos apenas de um PIX de R$ 30,00 referente à taxa de cadastro no sistema.</span></div>
+            </div>
+        </div>
+
+        <div id="screen-fase-sms-2" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-sms-2">0</span>/2</div>
+                </div>
+            </div>
+            <div class="sms-header">
+                <div class="sms-contact-info">
+                    <div class="sms-contact-name">28472</div>
+                    <div class="sms-contact-details">Número Curto</div>
+                </div>
+            </div>
+            <div class="sms-container">
+                <div class="sms-bubble">
+                    <span class="flag-target" id="flag-sms2-value">CAIXA: Compra aprovada no valor de R$ 3.850,00 nas Lojas Americanas em 20/03.</span> <br><br>
+                    <span class="flag-target" id="flag-sms2-0800">Se não foi você, cancele imediatamente ligando para nossa Central de Fraudes: 0800-123-4567.</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-fase-social-2" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-social-2">0</span>/3</div>
+                </div>
+            </div>
+            <div class="social-feed">
+                <div class="social-post-header">
+                    <div class="social-user-info">
+                        <div class="social-username">Moda Brasil Outlet</div>
+                        <div class="social-sponsored">Patrocinado</div>
+                    </div>
+                </div>
+                <div class="social-post-media" style="background: url('https://images.unsplash.com/photo-1552344804-1b11bc4c2cd8?w=800&q=80') center/cover;">
+                    <div class="social-video-overlay-text" style="background: rgba(0,0,0,0.7);">QUEIMA DE ESTOQUE 90% OFF</div>
+                </div>
+                <div class="social-post-cta">
+                    <div class="social-cta-text flag-target" id="flag-social2-url">lojas-oficiais-liquidacao.com</div>
+                    <button class="social-cta-btn">Comprar Agora ❯</button>
+                </div>
+                <div class="social-caption">
+                    <span class="flag-target" id="flag-social2-price">🚨 LOUCURA! Conjunto com 3 Malas de Viagem de Policarbonato por apenas R$ 89,90! 🚨 Últimas 5 unidades em estoque.</span>
+                </div>
+                <div class="social-comments flag-target" id="flag-social2-comments" style="padding:15px; background: #fee2e2; border-radius: 8px; margin: 0 15px;">Os comentários desta publicação foram limitados ou desativados.</div>
+            </div>
+        </div>
+
+        <!-- ================= NEW LEVELS ================= -->
+        
+        <!-- DATING SCAM LEVEL -->
+        <div id="screen-fase-dating-1" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-dating-1">0</span>/3</div>
+                </div>
+            </div>
+            <header class="wpp-header-real" style="background: linear-gradient(to right, #ec4899, #f43f5e);">
+                <div class="wpp-avatar-real">👱‍♂️</div>
+                <div class="wpp-contact-info">
+                    <div class="wpp-contact-name">Richard M.</div>
+                    <div class="wpp-contact-status" style="opacity:1;">A 5000 km de distância</div>
+                </div>
+            </header>
+            <div class="wpp-chat-area" style="background-color: #fdf2f8; background-image: none;">
+                <div class="chat-bubble chat-incoming">Oi linda! Finalmente consegui a minha folga do exército.</div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-love">Já estou vendo as passagens para ir te visitar! Você é a mulher da minha vida e mal posso esperar para ficarmos juntos.</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-excuse">Mas aconteceu um imprevisto terrível! Meu banco bloqueou meu cartão por causa de uma política internacional de segurança e não consigo comprar o voo.</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-money">Pode me transferir US$ 500 via Pix ou Criptomoedas apenas para eu emitir a passagem? Te devolvo tudo em dinheiro no momento em que eu desembarcar no Brasil!</span></div>
+            </div>
+        </div>
+
+        <!-- APP STORE SCAM LEVEL -->
+        <div id="screen-fase-apps-1" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-apps-1">0</span>/3</div>
+                </div>
+            </div>
+            <div style="flex: 1; background: var(--bg-card); padding: 20px; overflow-y: auto;">
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                    <div style="width: 80px; height: 80px; background: #8a05be; border-radius: 20px; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold; font-size:2rem;">N</div>
+                    <div style="flex:1;">
+                        <h2 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 5px;" class="flag-target" id="flag-app-name">NuBank Oficial 2026</h2>
+                        <p style="color: var(--accent-blue); font-size: 1rem;" class="flag-target" id="flag-app-dev">Super Game Apps LLC</p>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold; font-size: 1.1rem; color: var(--text-main);" class="flag-target" id="flag-app-reviews">14</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Avaliações</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold; font-size: 1.1rem; color: var(--text-main);">4.5★</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Nota</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold; font-size: 1.1rem; color: var(--text-main);" class="flag-target" id="flag-app-reviews">50+</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Downloads</div>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 12px; background: #059669; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem;">Instalar</button>
+                
+                <h3 style="margin-top:30px; margin-bottom:10px; color: var(--text-main);">Sobre este app</h3>
+                <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">Nova atualização oficial do aplicativo do banco para você realizar Pix e transferências gratuitas com mais segurança.</p>
+            </div>
+        </div>
+
+        <!-- VOICE CALL SCAM LEVEL -->
+        <div id="screen-fase-voice-1" class="hidden game-screen">
+            <div class="game-hud">
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <div class="hud-right">
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <div class="score-badge">Erros: <span id="counter-fase-voice-1">0</span>/2</div>
+                </div>
+            </div>
+            <div style="flex: 1; background: #1f2937; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+                <div style="width: 100px; height: 100px; background: #ef4444; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 3rem; margin-bottom: 20px; animation: pulse 2s infinite;">
+                    📞
+                </div>
+                <div style="color: white; font-size: 1.5rem; margin-bottom: 10px;">Central de Segurança</div>
+                <div style="color: #9ca3af; font-size: 1rem; margin-bottom: 40px;">00:45</div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; width: 100%; border-left: 4px solid #3b82f6;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Transcrição do Áudio:</div>
+                    <p style="color: white; line-height: 1.6; font-size: 1.05rem;">
+                        "Olá. Falamos do setor antifraude.<br><br>
+                        <span class="flag-target" id="flag-voice-threat" style="color:white;">Identificamos uma tentativa de transferência PIX no valor de R$ 4.500,00 da sua conta.</span><br><br>
+                        Para cancelar essa operação imediatamente, <span class="flag-target" id="flag-voice-password" style="color:white;">por favor, digite a sua senha de 6 dígitos no teclado do celular ou fale após o sinal sonoro.</span>"
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -266,23 +510,21 @@
 
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
-            
             <button class="modal-close-icon" onclick="fecharModalSemAcao()" aria-label="Fechar">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            
             <div class="modal-icon" id="modal-icon">🚨</div>
             <h2 class="modal-title" id="modal-title">Título</h2>
             <div class="modal-text" id="modal-text">Texto explicativo.</div>
-            
             <div class="modal-actions" id="modal-actions"></div>
         </div>
     </div>
 
-    <script src="database.js"></script>
-    <script src="script.js"></script>
+    <!-- Deferred script loading for better performance -->
+    <script src="database.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
