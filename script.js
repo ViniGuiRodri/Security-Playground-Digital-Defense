@@ -136,19 +136,29 @@ function voltarAoMenu() {
 }
 
 // Hint Mechanics: Highlights an unfound flag
+let hintTimeout;
 function usarDica() {
     const flagsDisponiveis = document.getElementById('screen-' + currentLevelId).querySelectorAll('.flag-target:not(.flag-found)');
     if (flagsDisponiveis.length > 0) {
         const flagSorteada = flagsDisponiveis[0]; 
+        
+        // Scroll slightly to make sure it's in view
+        flagSorteada.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
         flagSorteada.classList.add('hint-active');
-        // Remove the hint highlight after 2 seconds
-        setTimeout(() => { flagSorteada.classList.remove('hint-active'); }, 2000);
+        
+        if (hintTimeout) clearTimeout(hintTimeout);
+        // Remove the hint highlight after 3 seconds
+        hintTimeout = setTimeout(() => { flagSorteada.classList.remove('hint-active'); }, 3000);
     }
 }
 
 // Target click event logic
 document.querySelectorAll('.flag-target').forEach(item => {
     item.addEventListener('click', function() {
+        // Prevent clicking already found items
+        if(this.classList.contains('flag-found')) return;
+        
         const flagId = this.id; 
         this.classList.add('flag-found');
         this.classList.remove('flag-target');
@@ -156,8 +166,20 @@ document.querySelectorAll('.flag-target').forEach(item => {
         flagsFound++;
         document.getElementById('counter-' + currentLevelId).innerText = flagsFound;
         
+        // Vibrate slightly if supported on mobile
+        if(navigator.vibrate) navigator.vibrate(100);
+        
         // Fetch explanation from database
-        const info = gameDatabase.explanations[flagId];
+        let info = gameDatabase.explanations[flagId];
+        
+        // Fallback robusto para evitar que o modal deixe de aparecer (caso de erro de cache)
+        if (!info) {
+            info = { 
+                title: "Atenção!", 
+                text: "Você encontrou um sinal suspeito muito importante. Sempre desconfie de mensagens assim." 
+            };
+        }
+        
         let btnHtml = `<button class="modal-btn" onclick="fecharModalNormal()">Entendi!</button>`;
         showModal(info.title, info.text, '🚨', btnHtml);
     });
