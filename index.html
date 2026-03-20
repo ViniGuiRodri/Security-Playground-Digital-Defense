@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Disable auto-linking of phone numbers on mobile -->
     <meta name="format-detection" content="telephone=no">
     <title>Defesa Digital - Jogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -21,7 +20,6 @@
                 </div>
                 <div class="hq-actions-group">
                     <div class="global-score"><span id="ui-global-score">0</span> pts</div>
-                    <!-- Dark/Light Mode Toggle -->
                     <button class="btn-help" onclick="alternarTema()" aria-label="Mudar Tema" title="Modo Claro/Escuro">🌓</button>
                     <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar" title="Ajuda">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -84,7 +82,6 @@
                             <div class="category-arrow">❯</div>
                         </div>
 
-                        <!-- NEW CATEGORIES -->
                         <div class="category-card" onclick="abrirCategoria('dating')">
                             <div class="category-icon">❤️</div>
                             <div class="category-info">
@@ -97,7 +94,7 @@
                         <div class="category-card" onclick="abrirCategoria('apps')">
                             <div class="category-icon">🛒</div>
                             <div class="category-info">
-                                <div class="category-name">Lojas de Aplicativos</div>
+                                <div class="category-name">Lojas de Apps</div>
                                 <div class="category-meta" id="prog-cat-apps">0/1 Níveis Concluídos</div>
                             </div>
                             <div class="category-arrow">❯</div>
@@ -183,7 +180,7 @@
                             <div class="level-icon">▶️</div>
                         </button>
 
-                        <!-- NEW: DATING SCAM -->
+                        <!-- DATING SCAM -->
                         <button class="level-btn" data-category="dating" id="btn-fase-dating-1" onclick="abrirFase('fase-dating-1', 3)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: Amor Virtual <span id="badge-dating-1" class="hidden badge-done">CONCLUÍDO</span></span>
@@ -192,8 +189,8 @@
                             <div class="level-icon">▶️</div>
                         </button>
 
-                        <!-- NEW: APP SCAM -->
-                        <button class="level-btn" data-category="apps" id="btn-fase-apps-1" onclick="abrirFase('fase-apps-1', 3)">
+                        <!-- APP SCAM (CORRECTED FLAG COUNT TO 4) -->
+                        <button class="level-btn" data-category="apps" id="btn-fase-apps-1" onclick="abrirFase('fase-apps-1', 4)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: App do Banco <span id="badge-apps-1" class="hidden badge-done">CONCLUÍDO</span></span>
                                 <span class="level-desc">Baixando a nova versão.</span>
@@ -201,7 +198,7 @@
                             <div class="level-icon">▶️</div>
                         </button>
 
-                        <!-- NEW: VOICE SCAM -->
+                        <!-- VOICE SCAM -->
                         <button class="level-btn" data-category="voice" id="btn-fase-voice-1" onclick="abrirFase('fase-voice-1', 2)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: A Falsa Central <span id="badge-voice-1" class="hidden badge-done">CONCLUÍDO</span></span>
@@ -214,7 +211,7 @@
             </div>
         </div>
 
-        <!-- ================= EXISTING LEVELS ================= -->
+        <!-- ================= ORIGINAL LEVELS ================= -->
         <div id="screen-fase-email-1" class="hidden game-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
@@ -316,6 +313,7 @@
             </div>
         </div>
 
+        <!-- ================= PHASE 2 LEVELS ================= -->
         <div id="screen-fase-email-2" class="hidden game-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
@@ -337,7 +335,7 @@
                     <p>Prezado Cliente,</p>
                     <p><span class="flag-target" id="flag-email2-urgency">Notamos um acesso suspeito. Sua conta será BLOQUEADA em 2 horas caso não atualize seu Token de Segurança.</span></p>
                     <p>Para evitar multas e o bloqueio dos seus cartões, sincronize seu aparelho imediatamente clicando no botão seguro abaixo:</p>
-                    <a class="btn-streaming flag-target" id="flag-email2-link" style="background: #0b57d0;">SINCRONIZAR MEU TOKEN AGORA</a>
+                    <a class="btn-streaming flag-target" id="flag-email2-link" style="background: #0b57d0; cursor: pointer;">SINCRONIZAR MEU TOKEN AGORA</a>
                 </div>
             </div>
         </div>
@@ -447,7 +445,7 @@
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
                     <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-apps-1">0</span>/3</div>
+                    <div class="score-badge">Erros: <span id="counter-fase-apps-1">0</span>/4</div>
                 </div>
             </div>
             <div style="flex: 1; background: var(--bg-card); padding: 20px; overflow-y: auto;">
@@ -468,7 +466,7 @@
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Nota</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-weight: bold; font-size: 1.1rem; color: var(--text-main);" class="flag-target" id="flag-app-reviews">50+</div>
+                        <div style="font-weight: bold; font-size: 1.1rem; color: var(--text-main);" class="flag-target" id="flag-app-downloads">50+</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Downloads</div>
                     </div>
                 </div>
@@ -499,8 +497,8 @@
                     <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Transcrição do Áudio:</div>
                     <p style="color: white; line-height: 1.6; font-size: 1.05rem;">
                         "Olá. Falamos do setor antifraude.<br><br>
-                        <span class="flag-target" id="flag-voice-threat" style="color:white;">Identificamos uma tentativa de transferência PIX no valor de R$ 4.500,00 da sua conta.</span><br><br>
-                        Para cancelar essa operação imediatamente, <span class="flag-target" id="flag-voice-password" style="color:white;">por favor, digite a sua senha de 6 dígitos no teclado do celular ou fale após o sinal sonoro.</span>"
+                        <span class="flag-target" id="flag-voice-threat" style="color:white; cursor:pointer;">Identificamos uma tentativa de transferência PIX no valor de R$ 4.500,00 da sua conta.</span><br><br>
+                        Para cancelar essa operação imediatamente, <span class="flag-target" id="flag-voice-password" style="color:white; cursor:pointer;">por favor, digite a sua senha de 6 dígitos no teclado do celular ou fale após o sinal sonoro.</span>"
                     </p>
                 </div>
             </div>
@@ -523,8 +521,8 @@
         </div>
     </div>
 
-    <!-- Deferred script loading for better performance -->
-    <script src="database.js" defer></script>
-    <script src="script.js" defer></script>
+    <!-- Script versioning to avoid browser cache issues -->
+    <script src="database.js?v=3" defer></script>
+    <script src="script.js?v=3" defer></script>
 </body>
 </html>
