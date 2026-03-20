@@ -35,7 +35,7 @@ const gameDatabase = {
         'flag-social-promise': { title: 'A Promessa Milagrosa', text: 'Ninguém dá celulares de graça na internet! Se pedem para pagar "só o frete", é golpe.' },
 
         // PHASE 2 ADDITIONS
-        'flag-email2-domain': { title: 'E-mail Falso do Banco!', text: 'Bancos nunca usam e-mails estranhos como "@bb-atualizacao.net". Eles usam o domínio oficial e curto (como @bb.com.br).' },
+        'flag-email2-domain': { title: 'E-mail Falso do Banco!', text: 'Bancos nunca usam e-mails estranhos como "@bb-atualizacao-info.net". Eles usam o domínio oficial e curto (como @bb.com.br).' },
         'flag-email2-urgency': { title: 'Ameaça de Bloqueio!', text: 'Dizer que sua conta será bloqueada hoje é a tática nº 1 para causar pânico e fazer você clicar por medo.' },
         'flag-email2-link': { title: 'O Botão Perigoso', text: 'Nunca clique em botões para "Sincronizar" ou "Atualizar Token" por e-mail. Faça isso apenas dentro do aplicativo oficial do seu banco.' },
         
@@ -57,8 +57,9 @@ const gameDatabase = {
 
         // NEW CATEGORY: FAKE APPS SCAM
         'flag-app-dev': { title: 'Nome do Desenvolvedor', text: 'O desenvolvedor do app do seu banco deve ser o próprio banco verificado. Nomes estranhos ou "LLC" são golpistas.' },
-        'flag-app-reviews': { title: 'Poucas avaliações?', text: 'Aplicativos de bancos reais têm milhões de downloads e avaliações. Um app com dezenas de downloads é falso.' },
-        'flag-app-name': { title: 'Nome não oficial', text: 'Os golpistas usam nomes como "Atualizado 2026" ou "Nova Versão Oficial" para te enganar e baixar o app malicioso.' },
+        'flag-app-reviews': { title: 'Poucas avaliações?', text: 'Aplicativos de bancos reais têm milhões de downloads e avaliações. Um app com apenas 14 avaliações é falso.' },
+        'flag-app-downloads': { title: 'Poucos Downloads?', text: 'O aplicativo verdadeiro do seu banco tem milhões de instalações! Um app com apenas "50+" downloads foi criado recentemente por golpistas.' },
+        'flag-app-name': { title: 'Nome não oficial', text: 'Os golpistas usam nomes como "Atualizado 2026" ou "Nova Versão Oficial" para te enganar e fazer você baixar o app malicioso.' },
 
         // NEW CATEGORY: VOICE / CALL SCAM
         'flag-voice-threat': { title: 'Ameaça de prejuízo!', text: 'Eles inventam que um PIX altíssimo está sendo feito para te desesperar. O medo faz a pessoa agir por impulso.' },
