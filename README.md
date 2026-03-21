@@ -1,5 +1,5 @@
 # Security-Playground
-# 🛡️ Digital Defense (Defesa Digital) - Educational Game
+# 🛡️ Digital Defense - Educational Game
 
 [![Play Now](https://img.shields.io/badge/🎮_PLAY_NOW-059669?style=for-the-badge)](https://viniguirodri.github.io/Security-Playground-Digital-Defense/)
 
