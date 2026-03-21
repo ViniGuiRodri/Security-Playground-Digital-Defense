@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Defesa Digital - Jogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -19,7 +19,12 @@
                     <h1 class="menu-title">Defesa<br>Digital</h1>
                 </div>
                 <div class="hq-actions-group">
-                    <div class="global-score"><span id="ui-global-score">0</span> pts</div>
+                    <!-- NEW USER PROFILE BUTTON -->
+                    <div class="user-profile" onclick="abrirLoja()" title="Loja de Avatares">
+                        <div class="avatar-circle" id="ui-avatar">🕵️</div>
+                        <div class="global-score"><span id="ui-global-score">0</span> pts</div>
+                    </div>
+                    
                     <button class="btn-help" onclick="alternarTema()" aria-label="Mudar Tema" title="Modo Claro/Escuro">🌓</button>
                     <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar" title="Ajuda">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -189,7 +194,7 @@
                             <div class="level-icon">▶️</div>
                         </button>
 
-                        <!-- APP SCAM (CORRECTED FLAG COUNT TO 4) -->
+                        <!-- APP SCAM -->
                         <button class="level-btn" data-category="apps" id="btn-fase-apps-1" onclick="abrirFase('fase-apps-1', 4)">
                             <div class="level-info">
                                 <span class="level-name">Caso #01: App do Banco <span id="badge-apps-1" class="hidden badge-done">CONCLUÍDO</span></span>
@@ -216,7 +221,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()" title="Pedir Dica">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-email-1">0</span>/4</div>
                 </div>
             </div>
@@ -241,7 +246,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-wpp-1">0</span>/6</div>
                 </div>
             </div>
@@ -263,7 +268,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-sms-1">0</span>/3</div>
                 </div>
             </div>
@@ -286,7 +291,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-social-1">0</span>/4</div>
                 </div>
             </div>
@@ -318,7 +323,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-email-2">0</span>/3</div>
                 </div>
             </div>
@@ -344,7 +349,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-wpp-2">0</span>/3</div>
                 </div>
             </div>
@@ -366,7 +371,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-sms-2">0</span>/2</div>
                 </div>
             </div>
@@ -388,7 +393,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-social-2">0</span>/3</div>
                 </div>
             </div>
@@ -420,7 +425,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-dating-1">0</span>/3</div>
                 </div>
             </div>
@@ -444,7 +449,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-apps-1">0</span>/4</div>
                 </div>
             </div>
@@ -482,7 +487,7 @@
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica</button>
+                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
                     <div class="score-badge">Erros: <span id="counter-fase-voice-1">0</span>/2</div>
                 </div>
             </div>
@@ -506,6 +511,7 @@
 
     </main>
 
+    <!-- INFORMATION MODAL -->
     <div class="modal-overlay" id="info-modal">
         <div class="modal-content">
             <button class="modal-close-icon" onclick="fecharModalSemAcao()" aria-label="Fechar">
@@ -520,9 +526,24 @@
             <div class="modal-actions" id="modal-actions"></div>
         </div>
     </div>
+    
+    <!-- STORE MODAL -->
+    <div class="modal-overlay" id="store-modal">
+        <div class="modal-content store-content">
+            <button class="modal-close-icon" onclick="fecharLoja()" aria-label="Fechar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-icon">🛒</div>
+            <h2 class="modal-title">Loja do Detetive</h2>
+            <p class="modal-text" style="text-align: center; margin-bottom: 10px;">Encontre golpes para ganhar pontos e personalizar seu perfil!</p>
+            <div class="avatar-grid" id="avatar-grid"></div>
+        </div>
+    </div>
 
-    <!-- Script versioning to avoid browser cache issues -->
-    <script src="database.js?v=3" defer></script>
-    <script src="script.js?v=3" defer></script>
+    <script src="database.js?v=4" defer></script>
+    <script src="script.js?v=4" defer></script>
 </body>
 </html>
