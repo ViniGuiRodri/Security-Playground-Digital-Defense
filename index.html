@@ -4,35 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>Defesa Digital - Jogo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=4">
+    <title>Defesa Digital - Treinamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
     <main class="app-container">
-        
-        <div id="screen-menu" class="game-screen">
-            <div class="hq-header">
-                <div class="hq-title-group">
-                    <div class="menu-logo">🛡️</div>
-                    <h1 class="menu-title">Defesa<br>Digital</h1>
+
+        <!-- ================= START SCREEN (SPLASH) ================= -->
+        <div id="screen-start" class="game-screen active-screen">
+            <div class="cyber-grid"></div>
+            <div class="start-content">
+                <div class="logo-container">
+                    <svg class="modern-shield animated-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="shield-path" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path class="check-path" d="M9 12l2 2 4-4"></path>
+                    </svg>
                 </div>
-                <div class="hq-actions-group">
-                    <!-- NEW USER PROFILE BUTTON -->
-                    <div class="user-profile" onclick="abrirLoja()" title="Loja de Avatares">
-                        <div class="avatar-circle" id="ui-avatar">🕵️</div>
-                        <div class="global-score"><span id="ui-global-score">0</span> pts</div>
-                    </div>
-                    
-                    <button class="btn-help" onclick="alternarTema()" aria-label="Mudar Tema" title="Modo Claro/Escuro">🌓</button>
-                    <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar" title="Ajuda">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                <h1 class="main-title">DEFESA<br><span>DIGITAL</span></h1>
+                <p class="subtitle">Treinamento Antifraude</p>
+                <button class="btn-start" onclick="iniciarJogo()">INICIAR MISSÃO</button>
+            </div>
+        </div>
+        
+        <!-- ================= DASHBOARD MENU ================= -->
+        <div id="screen-menu" class="game-screen hidden">
+            <div class="hq-header-wrapper">
+                <div class="hq-header">
+                    <div class="hq-title-group">
+                        <!-- New Mini Logo for Header -->
+                        <svg class="modern-shield mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
                         </svg>
-                    </button>
+                        <h1 class="menu-title">Defesa<br>Digital</h1>
+                    </div>
+                    <div class="hq-actions-group">
+                        <div class="user-profile" onclick="abrirLoja()" title="Loja de Avatares">
+                            <div class="avatar-circle" id="ui-avatar">🕵️</div>
+                            <div class="global-score"><span id="ui-global-score">0</span> pts</div>
+                        </div>
+                        
+                        <button class="btn-help" onclick="alternarTema()" aria-label="Mudar Tema" title="Modo Claro/Escuro">🌓</button>
+                        <button class="btn-help" onclick="abrirTutorialGlobal()" aria-label="Como Jogar" title="Ajuda">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -217,7 +239,7 @@
         </div>
 
         <!-- ================= ORIGINAL LEVELS ================= -->
-        <div id="screen-fase-email-1" class="hidden game-screen">
+        <div id="screen-fase-email-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -242,7 +264,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-wpp-1" class="hidden game-screen">
+        <div id="screen-fase-wpp-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -264,7 +286,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-sms-1" class="hidden game-screen">
+        <div id="screen-fase-sms-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -287,7 +309,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-social-1" class="hidden game-screen">
+        <div id="screen-fase-social-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -319,7 +341,7 @@
         </div>
 
         <!-- ================= PHASE 2 LEVELS ================= -->
-        <div id="screen-fase-email-2" class="hidden game-screen">
+        <div id="screen-fase-email-2" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -345,7 +367,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-wpp-2" class="hidden game-screen">
+        <div id="screen-fase-wpp-2" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -367,7 +389,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-sms-2" class="hidden game-screen">
+        <div id="screen-fase-sms-2" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -389,7 +411,7 @@
             </div>
         </div>
 
-        <div id="screen-fase-social-2" class="hidden game-screen">
+        <div id="screen-fase-social-2" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -421,7 +443,7 @@
         <!-- ================= NEW LEVELS ================= -->
         
         <!-- DATING SCAM LEVEL -->
-        <div id="screen-fase-dating-1" class="hidden game-screen">
+        <div id="screen-fase-dating-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -445,7 +467,7 @@
         </div>
 
         <!-- APP STORE SCAM LEVEL -->
-        <div id="screen-fase-apps-1" class="hidden game-screen">
+        <div id="screen-fase-apps-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -483,7 +505,7 @@
         </div>
 
         <!-- VOICE CALL SCAM LEVEL -->
-        <div id="screen-fase-voice-1" class="hidden game-screen">
+        <div id="screen-fase-voice-1" class="hidden game-screen level-screen">
             <div class="game-hud">
                 <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
                 <div class="hud-right">
@@ -536,14 +558,14 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <div class="modal-icon">🛒</div>
-            <h2 class="modal-title">Loja do Detetive</h2>
-            <p class="modal-text" style="text-align: center; margin-bottom: 10px;">Encontre golpes para ganhar pontos e personalizar seu perfil!</p>
+            <div class="modal-icon" style="font-size: 2.5rem; margin-bottom:5px;">🛒</div>
+            <h2 class="modal-title" style="margin-bottom: 5px;">Loja do Detetive</h2>
+            <p class="modal-text" style="text-align: center; margin-bottom: 10px; font-size:1rem;">Ganhe pontos e personalize seu perfil!</p>
             <div class="avatar-grid" id="avatar-grid"></div>
         </div>
     </div>
 
-    <script src="database.js?v=4" defer></script>
-    <script src="script.js?v=4" defer></script>
+    <script src="database.js?v=5" defer></script>
+    <script src="script.js?v=5" defer></script>
 </body>
 </html>
