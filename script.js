@@ -2,9 +2,18 @@ let currentLevelId = '';
 let flagsFound = 0;
 let totalFlagsCurrentLevel = 0;
 let isVictoryModalOpen = false; 
-let audioCtx; // Web Audio API Context
 
 const niveisPorCategoria = gameDatabase.levels;
+
+const nomesCategorias = {
+    'email': 'E-mails Falsos',
+    'wpp': 'Golpes no WhatsApp',
+    'sms': 'Ligações e SMS',
+    'social': 'Redes Sociais',
+    'dating': 'Relacionamentos',
+    'apps': 'Lojas de Apps',
+    'voice': 'Chamadas de Voz'
+};
 
 // Avatars Database
 const avatarsData = [
@@ -37,78 +46,12 @@ if(localStorage.getItem('defesaDigitalTema') === 'dark') {
 }
 
 function alternarTema() {
-    playSound('click');
     document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
     localStorage.setItem('defesaDigitalTema', isDark ? 'dark' : 'light');
 }
 
-// ========== AUDIO SYNTHESIZER (No external files needed) ==========
-function initAudio() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-    }
-}
-
-function playSound(type) {
-    try {
-        initAudio();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        
-        const now = audioCtx.currentTime;
-        
-        if (type === 'start') {
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(300, now);
-            osc.frequency.exponentialRampToValueAtTime(800, now + 0.3);
-            gain.gain.setValueAtTime(0, now);
-            gain.gain.linearRampToValueAtTime(0.2, now + 0.1);
-            gain.gain.linearRampToValueAtTime(0, now + 0.4);
-            osc.start(now); osc.stop(now + 0.4);
-        } else if (type === 'flag') {
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(600, now);
-            osc.frequency.setValueAtTime(800, now + 0.1);
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.linearRampToValueAtTime(0, now + 0.2);
-            osc.start(now); osc.stop(now + 0.2);
-        } else if (type === 'win') {
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(440, now); // A4
-            osc.frequency.setValueAtTime(554, now + 0.1); // C#5
-            osc.frequency.setValueAtTime(659, now + 0.2); // E5
-            osc.frequency.setValueAtTime(880, now + 0.3); // A5
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.linearRampToValueAtTime(0, now + 0.6);
-            osc.start(now); osc.stop(now + 0.6);
-        } else if (type === 'click') {
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(400, now);
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-            osc.start(now); osc.stop(now + 0.1);
-        } else if (type === 'error') {
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(150, now);
-            osc.frequency.setValueAtTime(100, now + 0.2);
-            gain.gain.setValueAtTime(0.1, now);
-            gain.gain.linearRampToValueAtTime(0, now + 0.3);
-            osc.start(now); osc.stop(now + 0.3);
-        }
-    } catch(e) {
-        console.log('Audio disabled or not supported.');
-    }
-}
-// ===================================================================
-
 function iniciarJogo() {
-    playSound('start');
     gameState.hasStarted = true;
     salvarProgresso();
     document.getElementById('screen-start').classList.add('hidden');
@@ -171,9 +114,11 @@ function salvarProgresso() {
 }
 
 function abrirCategoria(categoriaId) {
-    playSound('click');
     document.getElementById('view-categories').classList.add('hidden');
     document.getElementById('view-levels').classList.remove('hidden');
+    
+    // Update Dynamic Category Title
+    document.getElementById('current-category-title').innerText = nomesCategorias[categoriaId] || "Níveis";
     
     document.querySelectorAll('.level-btn').forEach(btn => {
         if(btn.dataset.category === categoriaId) {
@@ -185,13 +130,11 @@ function abrirCategoria(categoriaId) {
 }
 
 function voltarParaCategorias() {
-    playSound('click');
     document.getElementById('view-levels').classList.add('hidden');
     document.getElementById('view-categories').classList.remove('hidden');
 }
 
 function abrirTutorialGlobal() {
-    playSound('click');
     const tutorialHTML = `
         <div class="tutorial-step"><div class="tutorial-number">🕵️</div><div class="tutorial-desc">Você é um <strong>Detetive Cibernético</strong>. Seu trabalho é ler conversas e mensagens suspeitas.</div></div>
         <div class="tutorial-step"><div class="tutorial-number">🔍</div><div class="tutorial-desc">Toque em erros para ganhar <strong>+20 pontos</strong>. Complete a fase para ganhar <strong>+100 pontos</strong>!</div></div>
@@ -210,7 +153,6 @@ function resetarJogo() {
 }
 
 function abrirFase(idDaFase, totalDeFlags) {
-    playSound('click');
     currentLevelId = idDaFase;
     flagsFound = 0;
     totalFlagsCurrentLevel = totalDeFlags;
@@ -227,7 +169,6 @@ function abrirFase(idDaFase, totalDeFlags) {
 }
 
 function voltarAoMenu() {
-    playSound('click');
     document.getElementById('screen-' + currentLevelId).classList.add('hidden');
     document.getElementById('screen-menu').classList.remove('hidden');
     currentLevelId = '';
@@ -235,13 +176,11 @@ function voltarAoMenu() {
 
 // Store Mechanics
 function abrirLoja() {
-    playSound('click');
     renderizarLoja();
     document.getElementById('store-modal').classList.add('active');
 }
 
 function fecharLoja() {
-    playSound('click');
     document.getElementById('store-modal').classList.remove('active');
 }
 
@@ -269,47 +208,19 @@ function comprarOuEquipar(avaId) {
     const isUnlocked = gameState.unlockedAvatars.includes(ava.id);
     
     if (isUnlocked) {
-        playSound('click');
         gameState.currentAvatar = ava.id;
         salvarProgresso();
         renderizarLoja();
     } else {
         if (gameState.score >= ava.price) {
-            playSound('win'); // special sound for purchase
             gameState.score -= ava.price;
             gameState.unlockedAvatars.push(ava.id);
             gameState.currentAvatar = ava.id;
             salvarProgresso();
             renderizarLoja();
         } else {
-            playSound('error');
             alert('Pontos insuficientes! Encontre mais golpes para juntar pontos.');
         }
-    }
-}
-
-// Hint Mechanics: Now costs 50 points
-let hintTimeout;
-function usarDica() {
-    if(gameState.score < 50) {
-        playSound('error');
-        showModal('Pontos Insuficientes', 'Você precisa de <strong>50 pontos</strong> para usar uma dica. Encontre sinais de golpe por conta própria para ganhar pontos!', '🪙', '<button class="modal-btn" onclick="fecharModalSemAcao()">Entendi</button>');
-        return;
-    }
-
-    const flagsDisponiveis = document.getElementById('screen-' + currentLevelId).querySelectorAll('.flag-target:not(.flag-found)');
-    if (flagsDisponiveis.length > 0) {
-        playSound('click');
-        // Deduct points
-        gameState.score -= 50;
-        salvarProgresso();
-
-        const flagSorteada = flagsDisponiveis[0]; 
-        flagSorteada.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        flagSorteada.classList.add('hint-active');
-        
-        if (hintTimeout) clearTimeout(hintTimeout);
-        hintTimeout = setTimeout(() => { flagSorteada.classList.remove('hint-active'); }, 3000);
     }
 }
 
@@ -320,10 +231,7 @@ document.querySelectorAll('.flag-target').forEach(item => {
         const flagId = this.id; 
         this.classList.add('flag-found');
         this.classList.remove('flag-target');
-        this.classList.remove('hint-active'); 
         flagsFound++;
-        
-        playSound('flag'); // Web Audio API success sound
         
         // Add points for finding a flag
         gameState.score += 20;
@@ -353,7 +261,7 @@ function showModal(title, textOrHTML, icon, buttonsHTML) {
     modal.classList.add('active'); 
 }
 
-function fecharModalSemAcao() { playSound('click'); modal.classList.remove('active'); }
+function fecharModalSemAcao() { modal.classList.remove('active'); }
 
 function voltarAoMenuDaVitoria() {
     fecharModalSemAcao();
@@ -361,7 +269,6 @@ function voltarAoMenuDaVitoria() {
 }
 
 function fecharModalNormal() {
-    playSound('click');
     modal.classList.remove('active'); 
 
     if (flagsFound === totalFlagsCurrentLevel && !isVictoryModalOpen) {
@@ -375,7 +282,6 @@ function fecharModalNormal() {
         }
         
         setTimeout(() => {
-            playSound('win'); // Victory Tune
             if(gameState.completedLevels.length === 11) {
                 let btnCertificado = `<button class="modal-btn success" onclick="voltarAoMenuDaVitoria()">Finalizar e Voltar</button>`;
                 showModal('Parabéns, Detetive! 🎓', 'Você completou TODAS as missões! Vá até a Loja e veja se consegue comprar o Avatar Final.', '🏆', btnCertificado);

@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Defesa Digital - Treinamento</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -33,7 +33,6 @@
             <div class="hq-header-wrapper">
                 <div class="hq-header">
                     <div class="hq-title-group">
-                        <!-- New Mini Logo for Header -->
                         <svg class="modern-shield mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             <path d="M9 12l2 2 4-4"></path>
@@ -140,6 +139,7 @@
 
                 <div id="view-levels" class="hidden">
                     <button class="btn-back-cat" onclick="voltarParaCategorias()">⬅ Voltar</button>
+                    <!-- Título Dinâmico do Tema -->
                     <h2 class="category-title" id="current-category-title">Níveis</h2>
                     
                     <div id="level-list">
@@ -241,10 +241,9 @@
         <!-- ================= ORIGINAL LEVELS ================= -->
         <div id="screen-fase-email-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-email-1">0</span>/4</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-email-1">0</span>/4</div>
                 </div>
             </div>
             <div class="gmail-content">
@@ -258,46 +257,60 @@
                 </div>
                 <div class="streaming-template">
                     <p><span class="flag-target" id="flag-greeting">Olá Cliente,</span></p>
-                    <p>Infelizmente, não conseguimos processar o pagamento da sua última mensalidade.</p>
-                    <a class="btn-streaming flag-target" id="flag-link">ATUALIZAR MEU PAGAMENTO</a>
+                    <p>Infelizmente, não conseguimos processar o pagamento da sua última mensalidade. Sua conta está inativa temporariamente.</p>
+                    <div class="btn-streaming flag-target" id="flag-link">ATUALIZAR MEU PAGAMENTO</div>
                 </div>
             </div>
         </div>
 
         <div id="screen-fase-wpp-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-wpp-1">0</span>/6</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-wpp-1">0</span>/6</div>
                 </div>
             </div>
             <header class="wpp-header-real">
+                <div class="wpp-header-back">←</div>
                 <div class="wpp-avatar-real flag-target" id="flag-wpp-photo">👤</div>
                 <div class="wpp-contact-info">
                     <div class="wpp-contact-name flag-target" id="flag-wpp-header-number">+55 11 9999-8888</div>
+                    <div class="wpp-contact-status">online</div>
                 </div>
+                <div class="wpp-header-icons"><span>🎥</span> <span>📞</span> <span>⋮</span></div>
             </header>
             <div class="wpp-chat-area">
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-text">Oi mãe! Meu celular estragou. Peguei esse provisório.</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-urgency">Tô precisando de um favor urgente. Meu aplicativo do banco bloqueou.</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-pix">Tem como fazer um PIX de R$ 850 pra mim?</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-thirdparty">A chave PIX é o celular dele: 11977776666<br>Nome: Marcos Silva Junior</span></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-text">Oi mãe! Meu celular estragou. Peguei esse provisório.</span><div class="chat-time">14:05</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-urgency">Tô precisando de um favor urgente. Meu aplicativo do banco bloqueou.</span><div class="chat-time">14:06</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-pix">Tem como fazer um PIX de R$ 850 pra mim?</span><div class="chat-time">14:07</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp-thirdparty">A chave PIX é o celular dele: 11977776666<br>Nome: Marcos Silva Junior</span><div class="chat-time">14:08</div></div>
+            </div>
+            <div class="wpp-input-area">
+                <div class="wpp-input-box">
+                    <span>😀</span>
+                    <span style="color: #8696a0;">Mensagem</span>
+                    <div style="margin-left: auto; display: flex; gap: 15px;">
+                        <span>📎</span>
+                        <span>📷</span>
+                    </div>
+                </div>
+                <div class="wpp-mic-btn">🎙️</div>
             </div>
         </div>
 
         <div id="screen-fase-sms-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-sms-1">0</span>/3</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-sms-1">0</span>/3</div>
                 </div>
             </div>
             <div class="sms-header">
-                <div class="sms-contact-info">
+                <div style="font-size: 1.2rem; color: #0b57d0;">❮</div>
+                <div class="sms-contact-info" style="text-align: center;">
                     <div class="sms-contact-name flag-target" id="flag-sms-sender">+55 21 98888-7777</div>
                 </div>
+                <div></div>
             </div>
             <div class="sms-container">
                 <div class="sms-bubble">
@@ -307,22 +320,32 @@
                     <span class="flag-target sms-link" id="flag-sms-link">https://correios-taxa-br-gov.com/rastreio</span>
                 </div>
             </div>
+            <div class="sms-input-area">
+                <div class="sms-plus-btn">+</div>
+                <div class="sms-input-box">Mensagem de texto</div>
+                <div class="sms-mic-btn">🎙️</div>
+            </div>
         </div>
 
         <div id="screen-fase-social-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-social-1">0</span>/4</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-social-1">0</span>/4</div>
                 </div>
+            </div>
+            <div class="social-top-bar">
+                <div class="social-logo">InstaSocial</div>
+                <div class="social-top-icons"><span>♡</span> <span>✉️</span></div>
             </div>
             <div class="social-feed">
                 <div class="social-post-header">
+                    <div class="social-avatar-icon">N</div>
                     <div class="social-user-info">
-                        <div class="social-username">Notícias Oficiais ✔️</div>
+                        <div class="social-username">Notícias Oficiais <span style="color: #3b82f6; font-size: 0.8rem;">✔️</span></div>
                         <div class="social-sponsored flag-target" id="flag-social-sponsored">Patrocinado</div>
                     </div>
+                    <div style="margin-left: auto;">⋮</div>
                 </div>
                 <div class="social-post-media">
                     <div class="social-video-bg"></div>
@@ -331,7 +354,11 @@
                 </div>
                 <div class="social-post-cta">
                     <div class="social-cta-text">resgate-oficial-br.com</div>
-                    <button class="social-cta-btn flag-target" id="flag-social-link">Saiba mais ❯</button>
+                    <div class="social-cta-btn flag-target" id="flag-social-link">Saiba mais ❯</div>
+                </div>
+                <div class="social-actions-bar">
+                    <span>❤️</span> <span>💬</span> <span>✈️</span>
+                    <span style="margin-left: auto;">🔖</span>
                 </div>
                 <div class="social-caption">
                     <strong>Notícias Oficiais</strong> <br>
@@ -343,10 +370,9 @@
         <!-- ================= PHASE 2 LEVELS ================= -->
         <div id="screen-fase-email-2" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-email-2">0</span>/3</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-email-2">0</span>/3</div>
                 </div>
             </div>
             <div class="gmail-content">
@@ -362,46 +388,55 @@
                     <p>Prezado Cliente,</p>
                     <p><span class="flag-target" id="flag-email2-urgency">Notamos um acesso suspeito. Sua conta será BLOQUEADA em 2 horas caso não atualize seu Token de Segurança.</span></p>
                     <p>Para evitar multas e o bloqueio dos seus cartões, sincronize seu aparelho imediatamente clicando no botão seguro abaixo:</p>
-                    <a class="btn-streaming flag-target" id="flag-email2-link" style="background: #0b57d0; cursor: pointer;">SINCRONIZAR MEU TOKEN AGORA</a>
+                    <div class="btn-streaming flag-target" id="flag-email2-link" style="background: #0b57d0;">SINCRONIZAR MEU TOKEN AGORA</div>
                 </div>
             </div>
         </div>
 
         <div id="screen-fase-wpp-2" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-wpp-2">0</span>/3</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-wpp-2">0</span>/3</div>
                 </div>
             </div>
             <header class="wpp-header-real">
+                <div class="wpp-header-back">←</div>
                 <div class="wpp-avatar-real" style="background: #25D366; color:white;">A</div>
                 <div class="wpp-contact-info">
                     <div class="wpp-contact-name flag-target" id="flag-wpp2-number">+62 812-3456-7890</div>
                     <div class="wpp-contact-status">Conta Comercial</div>
                 </div>
+                <div class="wpp-header-icons"><span>🎥</span> <span>📞</span> <span>⋮</span></div>
             </header>
             <div class="wpp-chat-area">
-                <div class="chat-bubble chat-incoming">Olá! Sou diretora de contratação do Mercado Livre e da Amazon.</div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-salary">Estamos recrutando pessoas para um trabalho de meio período curtindo e avaliando produtos. Você pode ganhar de R$ 500 a R$ 1.500 por dia pelo celular.</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-fee">As vagas são limitadas! Para confirmar sua inscrição e começar a receber hoje, precisamos apenas de um PIX de R$ 30,00 referente à taxa de cadastro no sistema.</span></div>
+                <div class="chat-bubble chat-incoming">Olá! Sou diretora de contratação do Mercado Livre e da Amazon.<div class="chat-time">09:12</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-salary">Estamos recrutando pessoas para um trabalho de meio período curtindo e avaliando produtos. Você pode ganhar de R$ 500 a R$ 1.500 por dia pelo celular.</span><div class="chat-time">09:12</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-wpp2-fee">As vagas são limitadas! Para confirmar sua inscrição e começar a receber hoje, precisamos apenas de um PIX de R$ 30,00 referente à taxa de cadastro no sistema.</span><div class="chat-time">09:13</div></div>
+            </div>
+            <div class="wpp-input-area">
+                <div class="wpp-input-box">
+                    <span>😀</span> <span style="color: #8696a0;">Mensagem</span>
+                    <div style="margin-left: auto; display: flex; gap: 15px;"><span>📎</span><span>📷</span></div>
+                </div>
+                <div class="wpp-mic-btn">🎙️</div>
             </div>
         </div>
 
         <div id="screen-fase-sms-2" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-sms-2">0</span>/2</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-sms-2">0</span>/2</div>
                 </div>
             </div>
             <div class="sms-header">
-                <div class="sms-contact-info">
+                <div style="font-size: 1.2rem; color: #0b57d0;">❮</div>
+                <div class="sms-contact-info" style="text-align: center;">
                     <div class="sms-contact-name">28472</div>
                     <div class="sms-contact-details">Número Curto</div>
                 </div>
+                <div></div>
             </div>
             <div class="sms-container">
                 <div class="sms-bubble">
@@ -409,34 +444,48 @@
                     <span class="flag-target" id="flag-sms2-0800">Se não foi você, cancele imediatamente ligando para nossa Central de Fraudes: 0800-123-4567.</span>
                 </div>
             </div>
+            <div class="sms-input-area">
+                <div class="sms-plus-btn">+</div>
+                <div class="sms-input-box">Mensagem de texto</div>
+                <div class="sms-mic-btn">🎙️</div>
+            </div>
         </div>
 
         <div id="screen-fase-social-2" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-social-2">0</span>/3</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-social-2">0</span>/3</div>
                 </div>
+            </div>
+            <div class="social-top-bar">
+                <div class="social-logo">InstaSocial</div>
+                <div class="social-top-icons"><span>♡</span> <span>✉️</span></div>
             </div>
             <div class="social-feed">
                 <div class="social-post-header">
+                    <div class="social-avatar-icon" style="background: #333;">M</div>
                     <div class="social-user-info">
                         <div class="social-username">Moda Brasil Outlet</div>
                         <div class="social-sponsored">Patrocinado</div>
                     </div>
+                    <div style="margin-left: auto;">⋮</div>
                 </div>
                 <div class="social-post-media" style="background: url('https://images.unsplash.com/photo-1552344804-1b11bc4c2cd8?w=800&q=80') center/cover;">
                     <div class="social-video-overlay-text" style="background: rgba(0,0,0,0.7);">QUEIMA DE ESTOQUE 90% OFF</div>
                 </div>
                 <div class="social-post-cta">
                     <div class="social-cta-text flag-target" id="flag-social2-url">lojas-oficiais-liquidacao.com</div>
-                    <button class="social-cta-btn">Comprar Agora ❯</button>
+                    <div class="social-cta-btn">Comprar Agora ❯</div>
+                </div>
+                <div class="social-actions-bar">
+                    <span>❤️</span> <span>💬</span> <span>✈️</span>
+                    <span style="margin-left: auto;">🔖</span>
                 </div>
                 <div class="social-caption">
                     <span class="flag-target" id="flag-social2-price">🚨 LOUCURA! Conjunto com 3 Malas de Viagem de Policarbonato por apenas R$ 89,90! 🚨 Últimas 5 unidades em estoque.</span>
                 </div>
-                <div class="social-comments flag-target" id="flag-social2-comments" style="padding:15px; background: #fee2e2; border-radius: 8px; margin: 0 15px;">Os comentários desta publicação foram limitados ou desativados.</div>
+                <div class="social-comments flag-target" id="flag-social2-comments">Os comentários desta publicação foram limitados ou desativados.</div>
             </div>
         </div>
 
@@ -445,34 +494,40 @@
         <!-- DATING SCAM LEVEL -->
         <div id="screen-fase-dating-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-dating-1">0</span>/3</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-dating-1">0</span>/3</div>
                 </div>
             </div>
             <header class="wpp-header-real" style="background: linear-gradient(to right, #ec4899, #f43f5e);">
+                <div class="wpp-header-back">←</div>
                 <div class="wpp-avatar-real">👱‍♂️</div>
                 <div class="wpp-contact-info">
                     <div class="wpp-contact-name">Richard M.</div>
                     <div class="wpp-contact-status" style="opacity:1;">A 5000 km de distância</div>
                 </div>
+                <div class="wpp-header-icons"><span>🛡️</span></div>
             </header>
             <div class="wpp-chat-area" style="background-color: #fdf2f8; background-image: none;">
-                <div class="chat-bubble chat-incoming">Oi linda! Finalmente consegui a minha folga do exército.</div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-love">Já estou vendo as passagens para ir te visitar! Você é a mulher da minha vida e mal posso esperar para ficarmos juntos.</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-excuse">Mas aconteceu um imprevisto terrível! Meu banco bloqueou meu cartão por causa de uma política internacional de segurança e não consigo comprar o voo.</span></div>
-                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-money">Pode me transferir US$ 500 via Pix ou Criptomoedas apenas para eu emitir a passagem? Te devolvo tudo em dinheiro no momento em que eu desembarcar no Brasil!</span></div>
+                <div class="chat-bubble chat-incoming">Oi linda! Finalmente consegui a minha folga do exército.<div class="chat-time">20:10</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-love">Já estou vendo as passagens para ir te visitar! Você é a mulher da minha vida e mal posso esperar para ficarmos juntos.</span><div class="chat-time">20:11</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-excuse">Mas aconteceu um imprevisto terrível! Meu banco bloqueou meu cartão por causa de uma política internacional de segurança e não consigo comprar o voo.</span><div class="chat-time">20:15</div></div>
+                <div class="chat-bubble chat-incoming"><span class="flag-target" id="flag-dating-money">Pode me transferir US$ 500 via Pix ou Criptomoedas apenas para eu emitir a passagem? Te devolvo tudo em dinheiro no momento em que eu desembarcar no Brasil!</span><div class="chat-time">20:16</div></div>
+            </div>
+            <div class="wpp-input-area" style="background: #fce7f3;">
+                <div class="wpp-input-box">
+                    <span style="color: #ec4899;">Mensagem</span>
+                </div>
+                <div class="wpp-mic-btn" style="background: #ec4899;">❤️</div>
             </div>
         </div>
 
         <!-- APP STORE SCAM LEVEL -->
         <div id="screen-fase-apps-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-apps-1">0</span>/4</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-apps-1">0</span>/4</div>
                 </div>
             </div>
             <div style="flex: 1; background: var(--bg-card); padding: 20px; overflow-y: auto;">
@@ -497,7 +552,7 @@
                         <div style="font-size: 0.8rem; color: var(--text-muted);">Downloads</div>
                     </div>
                 </div>
-                <button style="width: 100%; padding: 12px; background: #059669; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem;">Instalar</button>
+                <div style="width: 100%; padding: 12px; background: #059669; color: white; text-align: center; border-radius: 8px; font-weight: bold; font-size: 1.1rem;">Instalar</div>
                 
                 <h3 style="margin-top:30px; margin-bottom:10px; color: var(--text-main);">Sobre este app</h3>
                 <p style="color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;">Nova atualização oficial do aplicativo do banco para você realizar Pix e transferências gratuitas com mais segurança.</p>
@@ -507,10 +562,9 @@
         <!-- VOICE CALL SCAM LEVEL -->
         <div id="screen-fase-voice-1" class="hidden game-screen level-screen">
             <div class="game-hud">
-                <button class="btn-back" onclick="voltarAoMenu()">⬅ Sair</button>
+                <button class="btn-back" onclick="voltarAoMenu()">⬅ Voltar</button>
                 <div class="hud-right">
-                    <button class="btn-hint" onclick="usarDica()">🔍 Dica (50 pts)</button>
-                    <div class="score-badge">Erros: <span id="counter-fase-voice-1">0</span>/2</div>
+                    <div class="score-badge">Descobertos: <span id="counter-fase-voice-1">0</span>/2</div>
                 </div>
             </div>
             <div style="flex: 1; background: #1f2937; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
@@ -524,8 +578,8 @@
                     <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Transcrição do Áudio:</div>
                     <p style="color: white; line-height: 1.6; font-size: 1.05rem;">
                         "Olá. Falamos do setor antifraude.<br><br>
-                        <span class="flag-target" id="flag-voice-threat" style="color:white; cursor:pointer;">Identificamos uma tentativa de transferência PIX no valor de R$ 4.500,00 da sua conta.</span><br><br>
-                        Para cancelar essa operação imediatamente, <span class="flag-target" id="flag-voice-password" style="color:white; cursor:pointer;">por favor, digite a sua senha de 6 dígitos no teclado do celular ou fale após o sinal sonoro.</span>"
+                        <span class="flag-target" id="flag-voice-threat" style="color:white;">Identificamos uma tentativa de transferência PIX no valor de R$ 4.500,00 da sua conta.</span><br><br>
+                        Para cancelar essa operação imediatamente, <span class="flag-target" id="flag-voice-password" style="color:white;">por favor, digite a sua senha de 6 dígitos no teclado do celular ou fale após o sinal sonoro.</span>"
                     </p>
                 </div>
             </div>
@@ -565,7 +619,7 @@
         </div>
     </div>
 
-    <script src="database.js?v=5" defer></script>
-    <script src="script.js?v=5" defer></script>
+    <script src="database.js?v=6" defer></script>
+    <script src="script.js?v=6" defer></script>
 </body>
 </html>
